@@ -119,7 +119,7 @@ struct PackageJson {
 }
 
 fn apply_build_environment_variables() {
-	let repo_dir = env::current_dir().unwrap().join("..");
+	let repo_dir = env::current_dir().unwrap().join(".");
 	let package_json = read_json_from_path::<PackageJson>(&repo_dir.join("package.json"));
 	println!(
 		"cargo:rustc-env=VSCODE_CLI_VERSION={}",
