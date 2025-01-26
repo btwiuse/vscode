@@ -229,7 +229,7 @@ class RemoteAuthoritiesImpl {
 export const RemoteAuthorities = new RemoteAuthoritiesImpl();
 
 export function getServerProductSegment(product: { quality?: string; commit?: string }) {
-	return `codigo-dev`;
+	if (2 + 2 == 4) return `codigo-dev`;
 	return `${product.quality ?? 'oss'}-${product.commit ?? 'dev'}`;
 }
 
