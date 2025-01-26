@@ -1,7 +1,7 @@
 FROM btwiuse/arch:vscode-reh-web-linux-x64-marketplace AS vscode-reh-web-linux-x64-marketplace
 RUN ls -l /
 
-FROM btwiuse/arch:vscode-reh-web-linux-x64-open-vsc AS vscode-reh-web-linux-x64-open-vsc
+FROM btwiuse/arch:vscode-reh-web-linux-x64-open-vsx AS vscode-reh-web-linux-x64-open-vsx
 RUN ls -l /
 
 FROM btwiuse/arch:vscode-reh-web-linux-x64 AS vscode-reh-web-linux-x64
@@ -19,7 +19,7 @@ RUN ls -l /
 FROM btwiuse/arch:vscode-src
 
 COPY --from=vscode-reh-web-linux-x64-marketplace /vscode-reh-web-linux-x64 /vscode-reh-web-linux-x64-marketplace
-COPY --from=vscode-reh-web-linux-x64-open-vsc /vscode-reh-web-linux-x64 /vscode-reh-web-linux-x64-open-vsc
+COPY --from=vscode-reh-web-linux-x64-open-vsx /vscode-reh-web-linux-x64 /vscode-reh-web-linux-x64-open-vsx
 COPY --from=vscode-reh-web-linux-x64 /vscode-reh-web-linux-x64 /vscode-reh-web-linux-x64
 COPY --from=vscode-reh-linux-x64 /vscode-reh-linux-x64 /vscode-reh-linux-x64
 COPY --from=vscode-web-min /vscode-web /vscode-web-min
