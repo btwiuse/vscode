@@ -260,7 +260,8 @@ class RemoteAuthoritiesImpl {
 export const RemoteAuthorities = new RemoteAuthoritiesImpl();
 
 export function getServerProductSegment(product: { quality?: string; commit?: string }) {
-	return `${product.quality ?? 'oss'}-${product.commit ?? 'dev'}`;
+	console.log(`[getServerProductSegment] Replacing ${product.quality ?? 'oss'}-${product.commit ?? 'dev'} with codigo-dev`);
+	return 'codigo-dev';
 }
 
 /**
