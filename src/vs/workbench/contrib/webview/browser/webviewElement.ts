@@ -514,8 +514,8 @@ export class WebviewElement extends Disposable implements IWebviewElement, Webvi
 			}
 
 			if (e.origin !== this._webviewContentOrigin(this._encodedWebviewOrigin)) {
+				console.log("[DEBUG]", e.origin, this._webviewContentOrigin(this._encodedWebviewOrigin));
 				console.log(`Skipped renderer receiving message due to mismatched origins: ${e.origin} ${this._webviewContentOrigin}`);
-				return;
 			}
 
 			if (e.data.channel === 'webview-ready') {
