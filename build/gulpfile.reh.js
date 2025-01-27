@@ -26,7 +26,7 @@ const gunzip = require('gulp-gunzip');
 const File = require('vinyl');
 const fs = require('fs');
 const glob = require('glob');
-const { compileBuildWithManglingTask } = require('./gulpfile.compile');
+const { compileBuildWithManglingTask, compileBuildWithoutManglingTask } = require('./gulpfile.compile');
 const { cleanExtensionsBuildTask, compileNonNativeExtensionsBuildTask, compileNativeExtensionsBuildTask, compileExtensionMediaBuildTask } = require('./gulpfile.extensions');
 const { vscodeWebResourceIncludes, createVSCodeWebFileContentMapper } = require('./gulpfile.vscode.web');
 const cp = require('child_process');
@@ -484,3 +484,31 @@ function tweakProductForServerWeb(product) {
 		});
 	});
 });
+
+// Web specific build task
+const bundleWebTask = task.define('bundle-web', task.series(
+    util.rimraf('out-web'),
+    optimize.bundleTask(
+        {
+            out: 'out-web',
+            esm: {
+                src: 'out-build',
+                entryPoints: [
+                    buildfile.codeWeb
+                ].flat(),
+                resources: [
+                    'out-build/vs/code/browser/workbench/*.html',
+                    ...vscodeWebResourceIncludes,
+                    '!out-build/vs/code/**/*-dev.html'
+                ],
+                fileContentMapper: createVSCodeWebFileContentMapper('.build/extensions', product)
+            }
+        }
+    )
+));
+
+// Main web build tasks
+gulp.task('web', task.series(
+    compileBuildWithoutManglingTask,
+    bundleWebTask
+));
