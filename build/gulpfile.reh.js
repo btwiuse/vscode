@@ -490,3 +490,31 @@ function tweakProductForServerWeb(product) {
 		});
 	});
 });
+
+// Web specific build task
+const bundleWebTask = task.define('bundle-web', task.series(
+    util.rimraf('out-web'),
+    optimize.bundleTask(
+        {
+            out: 'out-web',
+            esm: {
+                src: 'out-build',
+                entryPoints: [
+                    buildfile.codeWeb
+                ].flat(),
+                resources: [
+                    'out-build/vs/code/browser/workbench/*.html',
+                    ...vscodeWebResourceIncludes,
+                    '!out-build/vs/code/**/*-dev.html'
+                ],
+                fileContentMapper: createVSCodeWebFileContentMapper('.build/extensions', product)
+            }
+        }
+    )
+));
+
+// Main web build tasks
+gulp.task('web', task.series(
+    compileBuildTask,
+    bundleWebTask
+));
