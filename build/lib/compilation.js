@@ -146,28 +146,7 @@ function compileTask(src, out, build, options = {}) {
         if (src === 'src') {
             generator.execute();
         }
-        // mangle: TypeScript to TypeScript
-        let mangleStream = event_stream_1.default.through();
-        if (build && !options.disableMangle) {
-            let ts2tsMangler = new index_1.Mangler(compile.projectPath, (...data) => (0, fancy_log_1.default)(ansi_colors_1.default.blue('[mangler]'), ...data), { mangleExports: true, manglePrivateFields: true });
-            const newContentsByFileName = ts2tsMangler.computeNewFileContents(new Set(['saveState']));
-            mangleStream = event_stream_1.default.through(async function write(data) {
-                const tsNormalPath = ts.normalizePath(data.path);
-                const newContents = (await newContentsByFileName).get(tsNormalPath);
-                if (newContents !== undefined) {
-                    data.contents = Buffer.from(newContents.out);
-                    data.sourceMap = newContents.sourceMap && JSON.parse(newContents.sourceMap);
-                }
-                this.push(data);
-            }, async function end() {
-                // free resources
-                (await newContentsByFileName).clear();
-                this.push(null);
-                ts2tsMangler = undefined;
-            });
-        }
         return srcPipe
-            .pipe(mangleStream)
             .pipe(generator.stream)
             .pipe(compile())
             .pipe(gulp_1.default.dest(out));
