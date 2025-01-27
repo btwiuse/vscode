@@ -27,7 +27,7 @@ import * as fs from 'fs';
 import glob from 'glob';
 import { promisify } from 'util';
 import rceditCallback from 'rcedit';
-import { compileBuildWithManglingTask } from './gulpfile.compile.ts';
+import { compileBuildWithManglingTask, compileBuildWithoutManglingTask } from './gulpfile.compile.ts';
 import { cleanExtensionsBuildTask, compileNonNativeExtensionsBuildTask, compileNativeExtensionsBuildTask, compileExtensionMediaBuildTask, compileCopilotExtensionBuildTask } from './gulpfile.extensions.ts';
 import { vscodeWebResourceIncludes, createVSCodeWebFileContentMapper } from './gulpfile.vscode.web.ts';
 import * as cp from 'child_process';
@@ -545,3 +545,31 @@ function tweakProductForServerWeb(product: typeof import('../product.json')) {
 		});
 	});
 });
+
+// Web specific build task
+const bundleWebTask = task.define('bundle-web', task.series(
+    util.rimraf('out-web'),
+    optimize.bundleTask(
+        {
+            out: 'out-web',
+            esm: {
+                src: 'out-build',
+                entryPoints: [
+                    buildfile.codeWeb
+                ].flat(),
+                resources: [
+                    'out-build/vs/code/browser/workbench/*.html',
+                    ...vscodeWebResourceIncludes,
+                    '!out-build/vs/code/**/*-dev.html'
+                ],
+                fileContentMapper: createVSCodeWebFileContentMapper('.build/extensions', product)
+            }
+        }
+    )
+));
+
+// Main web build tasks
+gulp.task('web', task.series(
+    compileBuildWithoutManglingTask,
+    bundleWebTask
+));
