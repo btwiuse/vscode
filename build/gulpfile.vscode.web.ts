@@ -10,7 +10,7 @@ import * as util from './lib/util.ts';
 import { getVersion } from './lib/getVersion.ts';
 import * as task from './lib/task.ts';
 import * as optimize from './lib/optimize.ts';
-import { readISODate } from './lib/date.ts';
+import { readISODate, writeISODate } from './lib/date.ts';
 import product from '../product.json' with { type: 'json' };
 import rename from 'gulp-rename';
 import filter from 'gulp-filter';
@@ -21,6 +21,7 @@ import { compileBuildWithManglingTask } from './gulpfile.compile.ts';
 import * as extensions from './lib/extensions.ts';
 import jsonEditor from 'gulp-json-editor';
 import buildfile from './buildfile.ts';
+import { compileTask } from './lib/compilation.ts';
 
 const REPO_ROOT = path.dirname(import.meta.dirname);
 const BUILD_ROOT = path.dirname(REPO_ROOT);
@@ -210,3 +211,34 @@ const dashed = (str: string) => (str ? `-${str}` : ``);
 	));
 	gulp.task(vscodeWebTask);
 });
+
+// Web specific build task
+const bundleWebTask = task.define('bundle-web-only', task.series(
+    util.rimraf('../vscode-web-only'),
+    optimize.bundleTask(
+        {
+            out: '../vscode-web-only',
+            esm: {
+                src: 'out-build',
+                entryPoints: [
+                    buildfile.codeWeb,
+                    buildfile.codeWebOnly
+                ].flat(),
+                resources: [
+                    'out-build/vs/code/browser/workbench/*.html',
+                    ...vscodeWebResourceIncludes,
+                    '!out-build/vs/code/**/*-dev.html'
+                ],
+                fileContentMapper: createVSCodeWebFileContentMapper('.build/extensions', product)
+            }
+        }
+    )
+));
+
+// Main web build tasks
+gulp.task('vscode-web-only', task.series(
+    util.rimraf('out-build'),
+    writeISODate('out-build'),
+    compileTask('src', 'out-build', false),
+    bundleWebTask
+));
