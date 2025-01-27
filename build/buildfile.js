@@ -58,6 +58,7 @@ exports.code = [
 ];
 
 exports.codeWeb = createModuleDescription('vs/code/browser/workbench/workbench');
+exports.codeWebOnly = createModuleDescription('vs/code/browser/workbench/web-only');
 
 exports.codeServer = [
 	// 'vs/server/node/server.main' is not included here because it gets inlined via ./src/server-main.js

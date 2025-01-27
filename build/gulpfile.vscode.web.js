@@ -8,6 +8,7 @@
 const gulp = require('gulp');
 const path = require('path');
 const es = require('event-stream');
+const date = require('./lib/date');
 const util = require('./lib/util');
 const { getVersion } = require('./lib/getVersion');
 const task = require('./lib/task');
@@ -20,6 +21,7 @@ const { getProductionDependencies } = require('./lib/dependencies');
 const vfs = require('vinyl-fs');
 const packageJson = require('../package.json');
 const { compileBuildTask } = require('./gulpfile.compile');
+const { compileTask } = require('./lib/compilation');
 const extensions = require('./lib/extensions');
 const VinylFile = require('vinyl');
 
@@ -228,3 +230,34 @@ const dashed = (/** @type {string} */ str) => (str ? `-${str}` : ``);
 	));
 	gulp.task(vscodeWebTask);
 });
+
+// Web specific build task
+const bundleWebTask = task.define('bundle-web-only', task.series(
+    util.rimraf('../vscode-web-only'),
+    optimize.bundleTask(
+        {
+            out: '../vscode-web-only',
+            esm: {
+                src: 'out-build',
+                entryPoints: [
+                    buildfile.codeWeb,
+                    buildfile.codeWebOnly
+                ].flat(),
+                resources: [
+                    'out-build/vs/code/browser/workbench/*.html',
+                    ...vscodeWebResourceIncludes,
+                    '!out-build/vs/code/**/*-dev.html'
+                ],
+                fileContentMapper: createVSCodeWebFileContentMapper('.build/extensions', product)
+            }
+        }
+    )
+));
+
+// Main web build tasks
+gulp.task('vscode-web-only', task.series(
+	util.rimraf('out-build'),
+	date.writeISODate('out-build'),
+	compileTask('src', 'out-build', false),
+    bundleWebTask
+));
