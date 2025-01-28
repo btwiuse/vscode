@@ -4,8 +4,8 @@ RUN git clone --depth=3 https://github.com/btwiuse/vscode -b vscode-web-index /a
 
 WORKDIR /app
 
-RUN bash ./vscode-web-index/pnpm-install
+RUN bash ./vscode-web-index/npm-install
 
-RUN bash ./vscode-web-index/pnpm-build
+RUN bash ./vscode-web-index/npm-build
 
 CMD bash ./vscode-web-index/package
