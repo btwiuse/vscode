@@ -1,0 +1,11 @@
+cd $(dirname $0)
+
+QUALITY=stable
+COMMIT=cd4ee3b1c348a13bafd8f9ad8060705f6d4b9cba
+WEB_ONLY=../../vscode-web-only
+
+curl -sL https://vscode.download.prss.microsoft.com/dbazure/download/$QUALITY/$COMMIT/vscode-web.tar.gz | tar xvz --strip=1
+
+# cp -v product.json config.json index.html vscode-web
+cp -v $WEB_ONLY/vs/code/browser/workbench/{callback.html,web-only*} .
+cp -v -r $WEB_ONLY/media/ .
