@@ -343,7 +343,8 @@ function connectToRenderer(protocol: IMessagePassingProtocol): Promise<IRenderer
 			if (rendererCommit && myCommit) {
 				// Running in the built version where commits are defined
 				if (rendererCommit !== myCommit) {
-					nativeExit(ExtensionHostExitCode.VersionMismatch);
+					//nativeExit(ExtensionHostExitCode.VersionMismatch);
+					console.log('[WARN2] version mismatch:', {rendererCommit, myCommit}, ExtensionHostExitCode.VersionMismatch);
 				}
 			}
 
