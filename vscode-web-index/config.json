@@ -1,0 +1,13 @@
+{
+  "_webviewEndpoint": "/out/vs/workbench/contrib/webview/browser/pre",
+  "_remoteAuthority": "vscode",
+  "serverBasePath": "/",
+  "developmentOptions": {
+    "logLevel": 3
+  },
+  "enableWorkspaceTrust": true,
+  "productConfiguration": {
+    "embedderIdentifier": "server-distro"
+  },
+  "callbackRoute": "/callback"
+}
