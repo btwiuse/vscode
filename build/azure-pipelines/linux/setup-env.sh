@@ -10,6 +10,7 @@ fi
 export VSCODE_SYSROOT_DIR=$PWD/.build/sysroots
 if [ -d "$VSCODE_SYSROOT_DIR" ]; then
   echo "Using cached sysroot"
+  mkdir -pv "$VSCODE_SYSROOT_DIR"
 else
   echo "Downloading sysroot"
   SYSROOT_ARCH="$SYSROOT_ARCH" node -e '(async () => { const { getVSCodeSysroot } = require("./build/linux/debian/install-sysroot.js"); await getVSCodeSysroot(process.env["SYSROOT_ARCH"]); })()'
