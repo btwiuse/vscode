@@ -1,6 +1,6 @@
 FROM btwiuse/arch:vscode-base
 
-RUN git clone --depth=3 https://github.com/btwiuse/vscode -b vscode-web-index /app
+COPY . /app
 
 WORKDIR /app
 
