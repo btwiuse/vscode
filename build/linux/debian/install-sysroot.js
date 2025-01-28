@@ -150,7 +150,7 @@ async function getVSCodeSysroot(arch) {
     }
     console.log(`Installing ${arch} root image: ${sysroot}`);
     fs_1.default.rmSync(sysroot, { recursive: true, force: true });
-    fs_1.default.mkdirSync(sysroot);
+    fs_1.default.mkdirSync(sysroot, { recursive: true });
     await fetchUrl({
         checksumSha256,
         assetName: expectedName,
@@ -179,7 +179,7 @@ async function getChromiumSysroot(arch) {
     }
     console.log(`Installing Debian ${arch} root image: ${sysroot}`);
     fs_1.default.rmSync(sysroot, { recursive: true, force: true });
-    fs_1.default.mkdirSync(sysroot);
+    fs_1.default.mkdirSync(sysroot, { recursive: true });
     const tarball = path_1.default.join(sysroot, tarballFilename);
     console.log(`Downloading ${url}`);
     let downloadSuccess = false;
