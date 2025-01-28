@@ -8,4 +8,4 @@ RUN npm i --ignore-scripts && npm --prefix=build i --ignore-scripts
 
 RUN npm run gulp vscode-web-only
 
-CMD ufo term
+CMD ./vscode-web-only/package
