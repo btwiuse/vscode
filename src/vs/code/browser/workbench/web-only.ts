@@ -20,6 +20,7 @@ import type { IWorkbenchConstructionOptions, IWorkspace, IWorkspaceProvider } fr
 import { AuthenticationSessionInfo } from '../../../workbench/services/authentication/browser/authenticationService.js';
 import type { IURLCallbackProvider } from '../../../workbench/services/url/browser/urlService.js';
 import { create } from '../../../workbench/workbench.web.main.internal.js';
+import { ICommand, Menu } from '../../../workbench/browser/web.api.js';
 
 interface ISecretStorageCrypto {
 	seal(data: string): Promise<string>;
@@ -442,6 +443,31 @@ class WorkspaceProvider implements IWorkspaceProvider {
 	}
 }
 
+export class Command implements ICommand {
+    constructor(
+        public readonly id: string,
+        public readonly handler: (...args: any[]) => unknown,
+        public readonly label?: string,
+        public readonly menu: Menu | Menu[] = Menu.CommandPalette
+    ) {}
+}
+
+// Example usage:
+const myCommand: ICommand = new Command(
+    'extension.myCommand',
+    (...args: any[]) => {
+        console.log('Number of arguments:', args.length);
+        args.forEach((arg, index) => {
+            console.log(`Argument ${index}:`, arg);
+            console.log('Type:', typeof arg);
+        });
+
+        return args; // Returns all arguments
+    },
+    'My Command',
+    [Menu.StatusBarWindowIndicatorMenu, Menu.CommandPalette]
+);
+
 (async function () {
 
 	// Find config by checking for DOM
@@ -455,6 +481,7 @@ class WorkspaceProvider implements IWorkspaceProvider {
 	// Create workbench
 	create(mainWindow.document.body, {
 		...config,
+		commands: [myCommand],
 		windowIndicator: config.windowIndicator ?? { label: '$(remote)', tooltip: `${product.nameShort} Web` },
 		settingsSyncOptions: config.settingsSyncOptions ? { enabled: config.settingsSyncOptions.enabled, } : undefined,
 		workspaceProvider: WorkspaceProvider.create(config),
