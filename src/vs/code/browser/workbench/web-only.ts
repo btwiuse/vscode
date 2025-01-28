@@ -250,6 +250,12 @@ class LocalStorageURLCallbackProvider extends Disposable implements IURLCallback
 	}
 }
 
+function remoteAuthority(config: IWorkbenchConstructionOptions) {
+   const url = new URL(document.location.href);
+   const authority = url.searchParams.get('remoteAuthority') || config.remoteAuthority;
+   return authority === null || authority === '' ? undefined : authority;
+}
+
 class WorkspaceProvider implements IWorkspaceProvider {
 
 	private static QUERY_PARAM_EMPTY_WINDOW = 'ew';
@@ -257,6 +263,7 @@ class WorkspaceProvider implements IWorkspaceProvider {
 	private static QUERY_PARAM_WORKSPACE = 'workspace';
 
 	private static QUERY_PARAM_PAYLOAD = 'payload';
+	private static QUERY_PARAM_REMOTE_AUTHORITY = 'remoteAuthority';
 
 	static create(config: IWorkbenchConstructionOptions & { folderUri?: UriComponents; workspaceUri?: UriComponents }) {
 		let foundWorkspace = false;
@@ -266,14 +273,13 @@ class WorkspaceProvider implements IWorkspaceProvider {
 		const query = new URL(document.location.href).searchParams;
 		query.forEach((value, key) => {
 			switch (key) {
-
 				// Folder
 				case WorkspaceProvider.QUERY_PARAM_FOLDER:
-					if (config.remoteAuthority && value.startsWith(posix.sep)) {
+					if (remoteAuthority(config) && value.startsWith(posix.sep)) {
 						// when connected to a remote and having a value
 						// that is a path (begins with a `/`), assume this
 						// is a vscode-remote resource as simplified URL.
-						workspace = { folderUri: URI.from({ scheme: Schemas.vscodeRemote, path: value, authority: config.remoteAuthority }) };
+						workspace = { folderUri: URI.from({ scheme: Schemas.vscodeRemote, path: value, authority: remoteAuthority(config) }) };
 					} else {
 						workspace = { folderUri: URI.parse(value) };
 					}
@@ -282,11 +288,11 @@ class WorkspaceProvider implements IWorkspaceProvider {
 
 				// Workspace
 				case WorkspaceProvider.QUERY_PARAM_WORKSPACE:
-					if (config.remoteAuthority && value.startsWith(posix.sep)) {
+					if (remoteAuthority(config) && value.startsWith(posix.sep)) {
 						// when connected to a remote and having a value
 						// that is a path (begins with a `/`), assume this
 						// is a vscode-remote resource as simplified URL.
-						workspace = { workspaceUri: URI.from({ scheme: Schemas.vscodeRemote, path: value, authority: config.remoteAuthority }) };
+						workspace = { workspaceUri: URI.from({ scheme: Schemas.vscodeRemote, path: value, authority: remoteAuthority(config) }) };
 					} else {
 						workspace = { workspaceUri: URI.parse(value) };
 					}
@@ -381,11 +387,16 @@ class WorkspaceProvider implements IWorkspaceProvider {
 			targetHref += `&${WorkspaceProvider.QUERY_PARAM_PAYLOAD}=${encodeURIComponent(JSON.stringify(options.payload))}`;
 		}
 
+		// Append remote authority if any
+		if (remoteAuthority(this.config)) {
+			targetHref += `&${WorkspaceProvider.QUERY_PARAM_REMOTE_AUTHORITY}=${remoteAuthority(this.config)}`;
+		}
+
 		return targetHref;
 	}
 
 	private encodeWorkspacePath(uri: URI): string {
-		if (this.config.remoteAuthority && uri.scheme === Schemas.vscodeRemote) {
+		if (remoteAuthority(this.config) && uri.scheme === Schemas.vscodeRemote) {
 
 			// when connected to a remote and having a folder
 			// or workspace for that remote, only use the path
@@ -448,8 +459,9 @@ class WorkspaceProvider implements IWorkspaceProvider {
 		settingsSyncOptions: config.settingsSyncOptions ? { enabled: config.settingsSyncOptions.enabled, } : undefined,
 		workspaceProvider: WorkspaceProvider.create(config),
 		urlCallbackProvider: new LocalStorageURLCallbackProvider(config.callbackRoute),
-		secretStorageProvider: config.remoteAuthority
+		secretStorageProvider: remoteAuthority(config)
 			? undefined /* with a remote without embedder-preferred storage, store on the remote */
 			: new LocalStorageSecretStorageProvider(secretStorageCrypto),
+		remoteAuthority: remoteAuthority(config),
 	});
 })();
