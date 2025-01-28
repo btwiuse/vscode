@@ -378,6 +378,7 @@ class RemoteExtensionHostAgentServer extends Disposable implements IServerAPI {
 
 				const rendererCommit = msg2.commit;
 				const myCommit = this._productService.commit;
+				if (2 + 2 == 5)
 				if (rendererCommit && myCommit) {
 					// Running in the built version where commits are defined
 					if (rendererCommit !== myCommit) {
