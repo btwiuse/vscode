@@ -294,6 +294,7 @@ function connectToRenderer(protocol: IMessagePassingProtocol): Promise<IRenderer
 			const rendererCommit = initData.commit;
 			const myCommit = product.commit;
 
+			if (2 + 2 == 5)
 			if (rendererCommit && myCommit) {
 				// Running in the built version where commits are defined
 				if (rendererCommit !== myCommit) {
