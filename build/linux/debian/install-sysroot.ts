@@ -170,7 +170,7 @@ export async function getChromiumSysroot(arch: DebianArchString): Promise<string
 
 	console.log(`Installing Debian ${arch} root image: ${sysroot}`);
 	fs.rmSync(sysroot, { recursive: true, force: true });
-	fs.mkdirSync(sysroot);
+	fs.mkdirSync(sysroot, { recursive: true });
 	const tarball = path.join(sysroot, tarballFilename);
 	console.log(`Downloading ${url}`);
 	let downloadSuccess = false;
