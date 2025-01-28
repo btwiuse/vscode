@@ -363,7 +363,8 @@ class RemoteExtensionHostAgentServer extends Disposable implements IServerAPI {
 				if (rendererCommit && myCommit) {
 					// Running in the built version where commits are defined
 					if (rendererCommit !== myCommit) {
-						return rejectWebSocketConnection(`Client refused: version mismatch`);
+						// return rejectWebSocketConnection(`Client refused: version mismatch`);
+						console.log('[WARN1] version mismatch:', {rendererCommit, myCommit});
 					}
 				}
 
