@@ -1,0 +1,3 @@
+corepack enable
+corepack prepare pnpm@latest --activate
+pnpm i --ignore-scripts && pnpm --prefix=build i --ignore-scripts

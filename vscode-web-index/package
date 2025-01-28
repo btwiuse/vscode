@@ -1,0 +1,17 @@
+cd $(dirname $0)
+
+WEB_ONLY=../../vscode-web-only
+
+echo "Using vscodium web"
+curl -sL https://github.com/btwiuse/vscodium/releases/download/1.96.4.25033/vscodium-web-1.96.4.25033.tar.gz | tar xz
+
+# cp -v product.json config.json index.html vscode-web
+cp -v $WEB_ONLY/vs/code/browser/workbench/{callback.html,web-only*} .
+cp -v -r $WEB_ONLY/media/ .
+
+[[ -n $RAILWAY_ENVIRONMENT ]] && {
+  ufo term &
+  env RELAY=:$PORT ufo pub .
+} || {
+  true
+}
