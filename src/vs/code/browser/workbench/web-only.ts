@@ -431,15 +431,14 @@ class WorkspaceProvider implements IWorkspaceProvider {
 	}
 }
 
-(function () {
+(async function () {
 
 	// Find config by checking for DOM
-	const configElement = mainWindow.document.getElementById('vscode-workbench-web-configuration');
-	const configElementAttribute = configElement ? configElement.getAttribute('data-settings') : undefined;
-	if (!configElement || !configElementAttribute) {
-		throw new Error('Missing web configuration element');
+	const response = await fetch('/config.json');
+	if (!response.ok) {
+		throw new Error(`Failed to fetch config: ${response.status} ${response.statusText}`);
 	}
-	const config: IWorkbenchConstructionOptions & { folderUri?: UriComponents; workspaceUri?: UriComponents; callbackRoute: string } = JSON.parse(configElementAttribute);
+	const config: IWorkbenchConstructionOptions & { folderUri?: UriComponents; workspaceUri?: UriComponents; callbackRoute: string } = await response.json();
 	const secretStorageCrypto = new TransparentCrypto();
 
 	// Create workbench
