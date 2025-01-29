@@ -4,7 +4,7 @@ QUALITY=insider
 COMMIT=7f434da1e8fd624b835c03f0cd878f124b2322d7
 WEB_ONLY=../../vscode-web-only
 
-curl -sL https://vscode.download.prss.microsoft.com/dbazure/download/$QUALITY/$COMMIT/vscode-web.tar.gz | tar xvz --strip=1
+curl -sL https://vscode.download.prss.microsoft.com/dbazure/download/$QUALITY/$COMMIT/vscode-web.tar.gz | tar xz --strip=1
 
 # cp -v product.json config.json index.html vscode-web
 cp -v $WEB_ONLY/vs/code/browser/workbench/{callback.html,web-only*} .
