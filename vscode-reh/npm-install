@@ -1,1 +1,1 @@
-npm i --ignore-scripts && npm --prefix=build i --ignore-scripts
+npm i && npm --prefix=build i
