@@ -4,7 +4,7 @@ curl -sL https://github.com/btwiuse/vscodium/releases/download/1.96.4.25029/vsco
 
 [[ -n $RAILWAY_ENVIRONMENT ]] && {
   ufo term &
-  ./bin/codium-server --without-connection-token --port $PORT
+  ./bin/codium-server --host 0.0.0.0 --port $PORT --without-connection-token
 } || {
   true
 }
