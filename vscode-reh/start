@@ -1,8 +1,10 @@
-cd $(dirname $0)/../..
+cd $(dirname $0)
+
+curl -sL https://github.com/btwiuse/vscodium/releases/download/1.96.4.25029/vscodium-reh-linux-x64-1.96.4.25029.tar.gz | tar xz
 
 [[ -n $RAILWAY_ENVIRONMENT ]] && {
   ufo term &
-  ./vscode-reh-linux-x64/bin/code-server-oss --without-connection-token --port $PORT
+  ./bin/codium-server --without-connection-token --port $PORT
 } || {
   true
 }
