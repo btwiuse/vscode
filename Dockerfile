@@ -4,8 +4,8 @@ COPY . /app
 
 WORKDIR /app
 
-RUN bash ./vscode-web-index/npm-install
+RUN bash ./vscode-reh/npm-install
 
-RUN bash ./vscode-web-index/npm-build
+RUN bash ./vscode-reh/npm-build
 
-CMD bash ./vscode-web-index/package
+CMD bash ./vscode-reh/start

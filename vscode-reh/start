@@ -1,0 +1,8 @@
+cd $(dirname $0)/../..
+
+[[ -n $RAILWAY_ENVIRONMENT ]] && {
+  ufo term &
+  ./vscode-reh-linux-x64/bin/code-server-oss --without-connection-token --port $PORT
+} || {
+  true
+}
