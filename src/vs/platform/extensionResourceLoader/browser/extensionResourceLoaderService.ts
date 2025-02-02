@@ -43,7 +43,13 @@ class ExtensionResourceLoaderService extends AbstractExtensionResourceLoaderServ
 			requestInit.mode = 'cors'; /* set mode to cors so that above headers are always passed */
 		}
 
-		const response = await fetch(uri.toString(true), requestInit);
+		let url = uri.toString(true);
+		console.log('readExtensionResource: ', url, requestInit);
+		if (uri.authority.endsWith('.vscode-unpkg.net')) {
+			url = 'https://no-cors.deno.dev/' + url;
+		}
+
+		const response = await fetch(url, requestInit);
 		if (response.status !== 200) {
 			this._logService.info(`Request to '${uri.toString(true)}' failed with status code ${response.status}`);
 			throw new Error(response.statusText);
