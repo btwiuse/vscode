@@ -35,27 +35,7 @@
   <body aria-label=""></body>
 
   <!-- Startup (do not modify order of script tags!) -->
-  <!--
-  <script>
-    {
-      let xhr = new XMLHttpRequest();
-      xhr.open("GET", "/config.json", false);
-      xhr.send(null);
-
-      if (xhr.status === 200) {
-        var meta = document.createElement("meta");
-        meta.id = "vscode-workbench-web-configuration";
-        meta.setAttribute("data-settings", xhr.responseText);
-        document.head.appendChild(meta);
-      } else {
-        console.error(
-          "Fetching workbench config failed:",
-          xhr.statusText,
-        );
-      }
-    }
-  </script>
-  -->
+  <!-- load /workbench.json from web-only.js, assigned to globalThis._VSCODE_WORKBENCH_JSON -->
   <script type="module" async>
     import eruda from "eruda";
     eruda.init();
