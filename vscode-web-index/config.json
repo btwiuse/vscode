@@ -7,7 +7,7 @@
   },
   "enableWorkspaceTrust": true,
   "productConfiguration": {
-    "embedderIdentifier": "server-distro"
+    "embedderIdentifier": "web"
   },
   "additionalBuiltinExtensions": [
     {
