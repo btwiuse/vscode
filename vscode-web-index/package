@@ -2,11 +2,17 @@ cd $(dirname $0)
 
 QUALITY=insider
 COMMIT=$(curl -sL https://update.code.visualstudio.com/api/update/web-standalone/$QUALITY/latest | jq .version -r)
+WEB=../../vscode-web
 WEB_ONLY=../../vscode-web-only
 
 echo COMMIT=$COMMIT
 
-curl -sL https://vscode.download.prss.microsoft.com/dbazure/download/$QUALITY/$COMMIT/vscode-web.tar.gz | tar xz --strip=1
+curl -sL https://vscode.download.prss.microsoft.com/dbazure/download/$QUALITY/$COMMIT/vscode-web.tar.gz | tee vscode-web.tar.gz | tar xz --strip=1
+
+{
+  tar -cz $WEB_ONLY > vscode-web-only.tgz
+  tar -cz $WEB > vscode-web.tgz
+}
 
 # cp -v product.json config.json index.html vscode-web
 cp -v $WEB_ONLY/vs/code/browser/workbench/{callback.html,web-only*} .
