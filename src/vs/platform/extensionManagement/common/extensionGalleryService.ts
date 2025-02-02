@@ -586,7 +586,7 @@ export abstract class AbstractExtensionGalleryService implements IExtensionGalle
 	async getExtensions(extensionInfos: ReadonlyArray<IExtensionInfo>, arg1: any, arg2?: any): Promise<IGalleryExtension[]> {
 		const extensionGalleryManifest = await this.extensionGalleryManifestService.getExtensionGalleryManifest();
 		if (!extensionGalleryManifest) {
-			throw new Error('No extension gallery service configured.');
+			throw new Error('1 No extension gallery service configured.');
 		}
 
 		const options = CancellationToken.isCancellationToken(arg1) ? {} : arg1 as IExtensionQueryOptions;
@@ -1309,7 +1309,7 @@ export abstract class AbstractExtensionGalleryService implements IExtensionGalle
 		const extensionsQueryApi = getExtensionGalleryManifestResourceUri(extensionGalleryManifest, ExtensionGalleryResourceType.ExtensionQueryService);
 
 		if (!extensionsQueryApi) {
-			throw new Error('No extension gallery query service configured.');
+			throw new Error('2 No extension gallery query service configured.');
 		}
 
 		query = query
@@ -1779,7 +1779,7 @@ export abstract class AbstractExtensionGalleryService implements IExtensionGalle
 
 	async getExtensionsControlManifest(): Promise<IExtensionsControlManifest> {
 		if (!this.isEnabled()) {
-			throw new Error('No extension gallery service configured.');
+			throw new Error('3 No extension gallery service configured.');
 		}
 
 		if (!this.extensionsControlUrl) {

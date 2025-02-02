@@ -175,7 +175,7 @@ export class WebClientServer {
 	 */
 	private async _handleWebExtensionResource(req: http.IncomingMessage, res: http.ServerResponse, resourcePath: string): Promise<void> {
 		if (!this._webExtensionResourceUrlTemplate) {
-			return serveError(req, res, 500, 'No extension gallery service configured.');
+			return serveError(req, res, 500, '4 No extension gallery service configured.');
 		}
 
 		const normalizedPathname = decodeURIComponent(resourcePath); // support paths that are uri-encoded (e.g. spaces => %20)
