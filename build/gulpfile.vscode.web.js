@@ -245,7 +245,13 @@ const bundleWebTask = task.define('bundle-web-only', task.series(
                 ].flat(),
                 resources: [
                     'out-build/vs/code/browser/workbench/*.html',
-                    ...vscodeWebResourceIncludes,
+
+                    // Webview
+                    'out-build/vs/workbench/contrib/webview/browser/pre/*.{js,html}',
+
+                    // Extension Host Worker
+                    'out-build/vs/workbench/services/extensions/worker/webWorkerExtensionHostIframe.html',
+
                     '!out-build/vs/code/**/*-dev.html'
                 ],
                 fileContentMapper: createVSCodeWebFileContentMapper('.build/extensions', product)
