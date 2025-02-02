@@ -1,1 +1,1 @@
-npm i && npm --prefix=build i
+npm ci && npm --prefix=build ci
