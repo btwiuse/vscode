@@ -471,12 +471,12 @@ const myCommand: ICommand = new Command(
 (async function () {
 
 	// Find config by checking for DOM
-	const response = await fetch('/config.json');
+	const response = await fetch('/workbench.json');
 	if (!response.ok) {
 		throw new Error(`Failed to fetch config: ${response.status} ${response.statusText}`);
 	}
 	const config: IWorkbenchConstructionOptions & { folderUri?: UriComponents; workspaceUri?: UriComponents; callbackRoute: string } = await response.json();
-	const secretStorageCrypto = new TransparentCrypto();
+	globalThis._VSCODE_WORKBENCH_JSON = config;
 
 	// Create workbench
 	create(mainWindow.document.body, {
@@ -488,7 +488,7 @@ const myCommand: ICommand = new Command(
 		urlCallbackProvider: new LocalStorageURLCallbackProvider(config.callbackRoute),
 		secretStorageProvider: remoteAuthority(config)
 			? undefined /* with a remote without embedder-preferred storage, store on the remote */
-			: new LocalStorageSecretStorageProvider(secretStorageCrypto),
+			: new LocalStorageSecretStorageProvider(new TransparentCrypto()),
 		remoteAuthority: remoteAuthority(config),
 	});
 })();
