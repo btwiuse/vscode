@@ -1,1 +1,5 @@
+pwd
+
+ls -l
+
 npm ci && npm --prefix=build ci
