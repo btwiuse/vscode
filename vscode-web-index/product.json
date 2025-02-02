@@ -1,6 +1,10 @@
 {
   "commit": "b286ccbe779eac9a589c2babc8929646d449cd99",
   "extensionsGallery": {
+    "serviceUrl": "https://open-vsx.org/vscode/gallery",
+    "itemUrl": "https://open-vsx.org/vscode/item"
+  },
+  "_extensionsGallery": {
     "nlsBaseUrl": "https://www.vscode-unpkg.net/_lp/",
     "serviceUrl": "https://marketplace.visualstudio.com/_apis/public/gallery",
     "searchUrl": "https://marketplace.visualstudio.com/_apis/public/gallery/searchrelevancy/extensionquery",
