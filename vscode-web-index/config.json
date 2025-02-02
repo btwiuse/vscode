@@ -12,7 +12,311 @@
   "additionalBuiltinExtensions": [
     {
       "scheme": "https",
+      "path": "/extensions/bat"
+    },
+    {
+      "scheme": "https",
+      "path": "/extensions/clojure"
+    },
+    {
+      "scheme": "https",
+      "path": "/extensions/coffeescript"
+    },
+    {
+      "scheme": "https",
+      "path": "/extensions/configuration-editing"
+    },
+    {
+      "scheme": "https",
+      "path": "/extensions/cpp"
+    },
+    {
+      "scheme": "https",
+      "path": "/extensions/csharp"
+    },
+    {
+      "scheme": "https",
+      "path": "/extensions/css"
+    },
+    {
+      "scheme": "https",
+      "path": "/extensions/css-language-features"
+    },
+    {
+      "scheme": "https",
+      "path": "/extensions/dart"
+    },
+    {
+      "scheme": "https",
+      "path": "/extensions/diff"
+    },
+    {
+      "scheme": "https",
+      "path": "/extensions/docker"
+    },
+    {
+      "scheme": "https",
+      "path": "/extensions/emmet"
+    },
+    {
+      "scheme": "https",
+      "path": "/extensions/extension-editing"
+    },
+    {
+      "scheme": "https",
+      "path": "/extensions/fsharp"
+    },
+    {
+      "scheme": "https",
+      "path": "/extensions/git-base"
+    },
+    {
+      "scheme": "https",
+      "path": "/extensions/github-authentication"
+    },
+    {
+      "scheme": "https",
+      "path": "/extensions/go"
+    },
+    {
+      "scheme": "https",
+      "path": "/extensions/groovy"
+    },
+    {
+      "scheme": "https",
+      "path": "/extensions/handlebars"
+    },
+    {
+      "scheme": "https",
+      "path": "/extensions/hlsl"
+    },
+    {
+      "scheme": "https",
+      "path": "/extensions/html"
+    },
+    {
+      "scheme": "https",
+      "path": "/extensions/html-language-features"
+    },
+    {
+      "scheme": "https",
+      "path": "/extensions/ini"
+    },
+    {
+      "scheme": "https",
+      "path": "/extensions/ipynb"
+    },
+    {
+      "scheme": "https",
+      "path": "/extensions/java"
+    },
+    {
+      "scheme": "https",
+      "path": "/extensions/javascript"
+    },
+    {
+      "scheme": "https",
+      "path": "/extensions/json"
+    },
+    {
+      "scheme": "https",
+      "path": "/extensions/json-language-features"
+    },
+    {
+      "scheme": "https",
+      "path": "/extensions/julia"
+    },
+    {
+      "scheme": "https",
+      "path": "/extensions/latex"
+    },
+    {
+      "scheme": "https",
+      "path": "/extensions/less"
+    },
+    {
+      "scheme": "https",
+      "path": "/extensions/log"
+    },
+    {
+      "scheme": "https",
+      "path": "/extensions/lua"
+    },
+    {
+      "scheme": "https",
+      "path": "/extensions/make"
+    },
+    {
+      "scheme": "https",
+      "path": "/extensions/markdown-basics"
+    },
+    {
+      "scheme": "https",
+      "path": "/extensions/markdown-language-features"
+    },
+    {
+      "scheme": "https",
+      "path": "/extensions/markdown-math"
+    },
+    {
+      "scheme": "https",
+      "path": "/extensions/media-preview"
+    },
+    {
+      "scheme": "https",
+      "path": "/extensions/merge-conflict"
+    },
+    {
+      "scheme": "https",
+      "path": "/extensions/microsoft-authentication"
+    },
+    {
+      "scheme": "https",
+      "path": "/extensions/notebook-renderers"
+    },
+    {
+      "scheme": "https",
+      "path": "/extensions/npm"
+    },
+    {
+      "scheme": "https",
+      "path": "/extensions/objective-c"
+    },
+    {
+      "scheme": "https",
+      "path": "/extensions/perl"
+    },
+    {
+      "scheme": "https",
+      "path": "/extensions/php"
+    },
+    {
+      "scheme": "https",
+      "path": "/extensions/powershell"
+    },
+    {
+      "scheme": "https",
+      "path": "/extensions/pug"
+    },
+    {
+      "scheme": "https",
+      "path": "/extensions/python"
+    },
+    {
+      "scheme": "https",
+      "path": "/extensions/r"
+    },
+    {
+      "scheme": "https",
+      "path": "/extensions/razor"
+    },
+    {
+      "scheme": "https",
+      "path": "/extensions/references-view"
+    },
+    {
+      "scheme": "https",
+      "path": "/extensions/restructuredtext"
+    },
+    {
+      "scheme": "https",
+      "path": "/extensions/ruby"
+    },
+    {
+      "scheme": "https",
+      "path": "/extensions/rust"
+    },
+    {
+      "scheme": "https",
+      "path": "/extensions/scss"
+    },
+    {
+      "scheme": "https",
+      "path": "/extensions/search-result"
+    },
+    {
+      "scheme": "https",
+      "path": "/extensions/shaderlab"
+    },
+    {
+      "scheme": "https",
+      "path": "/extensions/shellscript"
+    },
+    {
+      "scheme": "https",
+      "path": "/extensions/simple-browser"
+    },
+    {
+      "scheme": "https",
+      "path": "/extensions/sql"
+    },
+    {
+      "scheme": "https",
+      "path": "/extensions/swift"
+    },
+    {
+      "scheme": "https",
+      "path": "/extensions/theme-abyss"
+    },
+    {
+      "scheme": "https",
       "path": "/extensions/theme-defaults"
+    },
+    {
+      "scheme": "https",
+      "path": "/extensions/theme-kimbie-dark"
+    },
+    {
+      "scheme": "https",
+      "path": "/extensions/theme-monokai"
+    },
+    {
+      "scheme": "https",
+      "path": "/extensions/theme-monokai-dimmed"
+    },
+    {
+      "scheme": "https",
+      "path": "/extensions/theme-quietlight"
+    },
+    {
+      "scheme": "https",
+      "path": "/extensions/theme-red"
+    },
+    {
+      "scheme": "https",
+      "path": "/extensions/theme-seti"
+    },
+    {
+      "scheme": "https",
+      "path": "/extensions/theme-solarized-dark"
+    },
+    {
+      "scheme": "https",
+      "path": "/extensions/theme-solarized-light"
+    },
+    {
+      "scheme": "https",
+      "path": "/extensions/theme-tomorrow-night-blue"
+    },
+    {
+      "scheme": "https",
+      "path": "/extensions/typescript-basics"
+    },
+    {
+      "scheme": "https",
+      "path": "/extensions/typescript-language-features"
+    },
+    {
+      "scheme": "https",
+      "path": "/extensions/vb"
+    },
+    {
+      "scheme": "https",
+      "path": "/extensions/xml"
+    },
+    {
+      "scheme": "https",
+      "path": "/extensions/yaml"
     }
   ],
   "callbackRoute": "/out/callback"
