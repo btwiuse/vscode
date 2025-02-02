@@ -659,7 +659,7 @@ export class WebExtensionsScannerService extends Disposable implements IWebExten
 		}, 'extension');
 
 		if (!extensionLocation) {
-			throw new Error('No extension gallery service configured.');
+			throw new Error('5 No extension gallery service configured.');
 		}
 
 		return this.toWebExtensionFromExtensionGalleryResource(extensionLocation,
