@@ -9,5 +9,11 @@
   "productConfiguration": {
     "embedderIdentifier": "server-distro"
   },
+  "additionalBuiltinExtensions": [
+    {
+      "scheme": "https",
+      "path": "/extensions/theme-defaults"
+    }
+  ],
   "callbackRoute": "/callback"
 }
