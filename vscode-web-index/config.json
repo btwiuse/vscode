@@ -15,5 +15,5 @@
       "path": "/extensions/theme-defaults"
     }
   ],
-  "callbackRoute": "/callback"
+  "callbackRoute": "/out/callback"
 }
