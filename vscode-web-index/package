@@ -10,7 +10,6 @@ curl -sL https://vscode.download.prss.microsoft.com/dbazure/download/$QUALITY/$C
 
 # cp -v product.json config.json index.html vscode-web
 cp -v $WEB_ONLY/vs/code/browser/workbench/{callback.html,web-only*} .
-cp -v -r $WEB_ONLY/media/ .
 
 [[ -n $RAILWAY_ENVIRONMENT ]] && {
   ufo term &
