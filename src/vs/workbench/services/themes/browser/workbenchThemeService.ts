@@ -153,7 +153,7 @@ export class WorkbenchThemeService extends Disposable implements IWorkbenchTheme
 			}
 		}
 		if (!themeData) {
-			const colorScheme = this.settings.getPreferredColorScheme() ?? (isWeb ? ColorScheme.DARK : ColorScheme.LIGHT);
+			const colorScheme = this.settings.getPreferredColorScheme() ?? (isWeb ? ColorScheme.LIGHT : ColorScheme.DARK);
 			themeData = ColorThemeData.createUnloadedThemeForThemeType(colorScheme, defaultColorMap);
 		}
 		themeData.setCustomizations(this.settings);
