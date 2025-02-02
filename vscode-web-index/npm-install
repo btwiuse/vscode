@@ -2,4 +2,16 @@ pwd
 
 ls -l
 
-npm ci && npm --prefix=build ci
+[[ -d ./node_modules ]] && {
+  du -sh ./node_modules
+  rm -rf ./node_modules
+}
+
+npm ci
+
+[[ -d ./build/node_modules ]] && {
+  du -sh ./build/node_modules
+  rm -rf ./build/node_modules
+}
+
+npm --prefix=build ci
