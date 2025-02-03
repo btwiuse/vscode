@@ -468,6 +468,20 @@ const myCommand: ICommand = new Command(
     [Menu.StatusBarWindowIndicatorMenu, Menu.CommandPalette]
 );
 
+const patchABE = (config: any) => {
+	if (!config.additionalBuiltinExtensions) {
+		config.additionalBuiltinExtensions = [];
+	}
+	config.additionalBuiltinExtensions = config.additionalBuiltinExtensions.map((extension: UriComponents) => {
+		return {
+			...extension,
+			authority: window.location.host,
+			scheme: window.location.protocol.replace(/:$/, ''),
+		};
+	});
+	return config;
+}
+
 (async function () {
 
 	// Find config by checking for DOM
@@ -475,7 +489,8 @@ const myCommand: ICommand = new Command(
 	if (!response.ok) {
 		throw new Error(`Failed to fetch config: ${response.status} ${response.statusText}`);
 	}
-	const config: IWorkbenchConstructionOptions & { folderUri?: UriComponents; workspaceUri?: UriComponents; callbackRoute: string } = await response.json();
+
+	const config: IWorkbenchConstructionOptions & { folderUri?: UriComponents; workspaceUri?: UriComponents; callbackRoute: string } = patchABE(await response.json());
 
 	// Create workbench
 	create(mainWindow.document.body, {
