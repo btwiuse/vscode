@@ -476,7 +476,6 @@ const myCommand: ICommand = new Command(
 		throw new Error(`Failed to fetch config: ${response.status} ${response.statusText}`);
 	}
 	const config: IWorkbenchConstructionOptions & { folderUri?: UriComponents; workspaceUri?: UriComponents; callbackRoute: string } = await response.json();
-	globalThis._VSCODE_WORKBENCH_JSON = config;
 
 	// Create workbench
 	create(mainWindow.document.body, {
