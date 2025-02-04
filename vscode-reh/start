@@ -1,6 +1,6 @@
 cd $(dirname $0)
 
-curl -sL https://github.com/btwiuse/vscodium/releases/download/1.96.4.25029/vscodium-reh-linux-x64-1.96.4.25029.tar.gz | tar xz
+curl -sL https://github.com/btwiuse/vscodium/releases/download/1.96.4.25033/vscodium-reh-linux-x64-1.96.4.25033.tar.gz | tar xz
 
 [[ -n $RAILWAY_ENVIRONMENT ]] && {
   ufo upgrade
