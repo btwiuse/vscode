@@ -41,32 +41,49 @@
     eruda.init();
   </script>
   <script>
-    {
-      let xhr = new XMLHttpRequest();
-      xhr.open("GET", "/product.json", false);
-      xhr.send(null);
+    function fetchJSON(url, options = {}) {
+      const {
+        method = "GET",
+        parseJSON = true,
+        logErrors = true,
+        body = null,
+        headers = {},
+      } = options;
 
-      if (xhr.status === 200) {
-        globalThis._VSCODE_PRODUCT_JSON = JSON.parse(xhr.responseText);
-      } else {
-        console.error("Fetching product.json failed:", xhr.statusText);
+      try {
+        const xhr = new XMLHttpRequest();
+        xhr.open(method.toUpperCase(), url, false); // synchronous request
+
+        // Set headers
+        Object.entries(headers).forEach(([key, value]) => {
+          xhr.setRequestHeader(key, value);
+        });
+
+        // Send with optional body
+        const requestBody = body
+          ? (typeof body === "string" ? body : JSON.stringify(body))
+          : null;
+        xhr.send(requestBody);
+
+        if (xhr.status === 200) {
+          const response = xhr.responseText;
+          return parseJSON ? JSON.parse(response) : response;
+        }
+
+        if (logErrors) {
+          console.error(`Failed to fetch ${url}:`, xhr.statusText);
+        }
+
+        return null;
+      } catch (error) {
+        if (logErrors) {
+          console.error(`Error fetching ${url}:`, error);
+        }
+        return null;
       }
     }
-  </script>
-  <script>
-    {
-      let xhr = new XMLHttpRequest();
-      xhr.open("GET", "/package.json", false);
-      xhr.send(null);
-
-      if (xhr.status === 200) {
-        globalThis._VSCODE_PACKAGE_JSON = JSON.parse(xhr.responseText);
-      } else {
-        console.error("Fetching package.json failed:", xhr.statusText);
-      }
-    }
-  </script>
-  <script>
+    globalThis._VSCODE_PRODUCT_JSON = fetchJSON("/product.json");
+    globalThis._VSCODE_PACKAGE_JSON = fetchJSON("/package.json");
     globalThis._VSCODE_FILE_ROOT = new URL(
       "/out/",
       window.location.origin,
@@ -76,5 +93,8 @@
   <script type="module" src="/out/nls.messages.js"></script>
   <!-- attempt to load NLS messages in case non-english -->
   <script type="module" src=""></script>
-  <script type="module" src="/out/vs/code/browser/workbench/web-only.js"></script>
+  <script
+    type="module"
+    src="/out/vs/code/browser/workbench/web-only.js"
+  ></script>
 </html>
