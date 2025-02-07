@@ -339,8 +339,9 @@ class WorkspaceProvider implements IWorkspaceProvider {
 	) {
 	}
 
-	async open(workspace: IWorkspace, options?: { reuse?: boolean; payload?: object }): Promise<boolean> {
-		if (options?.reuse && !options.payload && this.isSame(this.workspace, workspace)) {
+	async open(workspace: IWorkspace, options?: { reuse?: boolean; remoteAuthority?: string; payload?: object }): Promise<boolean> {
+		console.log({workspace, options});
+		if (options?.reuse && !options.payload && this.isSame(this.workspace, workspace) && options?.remoteAuthority === remoteAuthority(this.config)) {
 			return true; // return early if workspace and environment is not changing and we are reusing window
 		}
 
@@ -363,12 +364,16 @@ class WorkspaceProvider implements IWorkspaceProvider {
 		return false;
 	}
 
-	private createTargetUrl(workspace: IWorkspace, options?: { reuse?: boolean; payload?: object }): string | undefined {
+	private createTargetUrl(workspace: IWorkspace, options?: { reuse?: boolean; remoteAuthority?: string; payload?: object }): string | undefined {
 
 		// Empty
 		let targetHref: string | undefined = undefined;
 		if (!workspace) {
-			targetHref = `${document.location.origin}${document.location.pathname}?${WorkspaceProvider.QUERY_PARAM_EMPTY_WINDOW}=true`;
+			if (options?.remoteAuthority) {
+				targetHref = `${document.location.origin}${document.location.pathname}?${WorkspaceProvider.QUERY_PARAM_REMOTE_AUTHORITY}=${options?.remoteAuthority}`;
+			} else {
+				targetHref = `${document.location.origin}${document.location.pathname}?`;
+			}
 		}
 
 		// Folder
@@ -389,7 +394,7 @@ class WorkspaceProvider implements IWorkspaceProvider {
 		}
 
 		// Append remote authority if any
-		if (remoteAuthority(this.config)) {
+		if (remoteAuthority(this.config) && !options?.remoteAuthority) {
 			targetHref += `&${WorkspaceProvider.QUERY_PARAM_REMOTE_AUTHORITY}=${remoteAuthority(this.config)}`;
 		}
 
