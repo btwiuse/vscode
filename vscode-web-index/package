@@ -2,13 +2,28 @@ cd $(dirname $0)
 
 WEB_ONLY=../../vscode-web-only
 
-echo "Using vscodium web"
-curl -sL https://github.com/btwiuse/vscodium/releases/download/1.96.4.25039/vscodium-web-1.96.4.25039.tar.gz | tar xz
+QUALITY=insider
+COMMIT=$(curl -sL https://update.code.visualstudio.com/api/update/web-standalone/$QUALITY/latest | npx -y node-jq .version -r)
+
+function use_vscode() {
+  true
+}
+
+use_vscode && {
+  echo "Using vscode COMMIT=$COMMIT"
+
+  curl -sL https://vscode.download.prss.microsoft.com/dbazure/download/$QUALITY/$COMMIT/vscode-web.tar.gz | tar xz --strip=1
+} || {
+  echo "Using vscodium web"
+  curl -sL https://github.com/btwiuse/vscodium/releases/download/1.96.4.25038/vscodium-web-1.96.4.25038.tar.gz | tar xz
+}
 
 # cp -v product.json config.json index.html vscode-web
 
 mkdir -p ./out/vs/code/browser/workbench/
 cp -v $WEB_ONLY/vs/code/browser/workbench/{callback.html,web-only*} ./out/vs/code/browser/workbench/
+cp -v ../resources/server/{*.png,*.ico,*.json} .
+cp -v ../codigo.svg ./out/media/code-icon.svg
 
 [[ -n $RAILWAY_ENVIRONMENT ]] && {
   ufo term &
