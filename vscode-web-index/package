@@ -24,6 +24,7 @@ mkdir -p ./out/vs/code/browser/workbench/
 cp -v $WEB_ONLY/vs/code/browser/workbench/{callback.html,web-only*} ./out/vs/code/browser/workbench/
 cp -v ../resources/server/{*.png,*.ico,*.json} .
 cp -v ../codigo.svg ./out/media/code-icon.svg
+cp -v ../letterpress-*.svg ./out/media/
 
 [[ -n $RAILWAY_ENVIRONMENT ]] && {
   ufo term &
