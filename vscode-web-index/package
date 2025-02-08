@@ -6,7 +6,7 @@ QUALITY=insider
 COMMIT=$(curl -sL https://update.code.visualstudio.com/api/update/web-standalone/$QUALITY/latest | npx -y node-jq .version -r)
 
 function use_vscode() {
-  true
+  false
 }
 
 use_vscode && {
