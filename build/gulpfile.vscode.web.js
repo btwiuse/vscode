@@ -180,6 +180,10 @@ function packageTask(sourceFolderName, destinationFolderName) {
 		const favicon = gulp.src('resources/server/favicon.ico', { base: 'resources/server' });
 		const manifest = gulp.src('resources/server/manifest.json', { base: 'resources/server' });
 		const pwaicons = es.merge(
+			gulp.src('resources/server/code-192-light.png', { base: 'resources/server' }),
+			gulp.src('resources/server/code-512-light.png', { base: 'resources/server' }),
+			gulp.src('resources/server/code-192-dark.png', { base: 'resources/server' }),
+			gulp.src('resources/server/code-512-dark.png', { base: 'resources/server' }),
 			gulp.src('resources/server/code-192.png', { base: 'resources/server' }),
 			gulp.src('resources/server/code-512.png', { base: 'resources/server' })
 		);
