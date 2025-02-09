@@ -41,7 +41,7 @@ const nativeClose = self.close.bind(self);
 self.close = () => console.trace(`'close' has been blocked`);
 
 const nativePostMessage = postMessage.bind(self);
-self.postMessage = () => console.trace(`'postMessage' has been blocked`);
+// self.postMessage = () => console.trace(`'postMessage' has been blocked`);
 
 function shouldTransformUri(uri: string): boolean {
 	// In principle, we could convert any URI, but we have concerns
@@ -78,7 +78,7 @@ function patchFetching(asBrowserUri: (uri: URI) => Promise<URI>) {
 self.importScripts = () => { throw new Error(`'importScripts' has been blocked`); };
 
 // const nativeAddEventListener = addEventListener.bind(self);
-self.addEventListener = () => console.trace(`'addEventListener' has been blocked`);
+// self.addEventListener = () => console.trace(`'addEventListener' has been blocked`);
 
 (<any>self)['AMDLoader'] = undefined;
 (<any>self)['NLSLoaderPlugin'] = undefined;
