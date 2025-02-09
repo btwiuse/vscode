@@ -15,7 +15,7 @@ use_vscode && {
   curl -sL https://vscode.download.prss.microsoft.com/dbazure/download/$QUALITY/$COMMIT/vscode-web.tar.gz | tar xz --strip=1
 } || {
   echo "Using vscodium web"
-  curl -sL https://github.com/btwiuse/vscodium/releases/download/1.96.4.25038/vscodium-web-1.96.4.25038.tar.gz | tar xz
+  curl -sL https://github.com/btwiuse/vscodium/releases/download/1.96.4.25043/vscodium-web-1.96.4.25043.tar.gz | tar xz
 }
 
 # cp -v product.json config.json index.html vscode-web
