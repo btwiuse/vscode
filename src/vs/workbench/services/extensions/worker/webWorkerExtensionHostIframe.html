@@ -4,7 +4,7 @@
 		<meta http-equiv="Content-Security-Policy" content="
 			default-src 'none';
 			child-src 'self' data: blob:;
-			script-src 'self' 'unsafe-eval' 'sha256-cl8ijlOzEe+0GRCQNJQu2k6nUQ0fAYNYIuuKEm72JDs=' https: http://localhost:* blob:;
+			script-src 'self' 'unsafe-eval' 'sha256-c8thgD+1oN4/vlEAklpmXmsovnj5avm4D6O+BpUcKdU=' https: http://localhost:* blob:;
 			connect-src 'self' https: wss: http://localhost:* http://127.0.0.1:* ws://localhost:* ws://127.0.0.1:*;"/>
 	</head>
 	<body>
@@ -19,41 +19,7 @@
 	const salt = searchParams.get('salt');
 
 	(async function () {
-		const hostnameValidationMarker = 'v--';
-		const hostname = location.hostname;
-		if (!hostname.startsWith(hostnameValidationMarker)) {
-			// validation not requested
-			return start();
-		}
-		if (!crypto.subtle) {
-			// cannot validate, not running in a secure context
-			return sendError(new Error(`Cannot validate in current context!`));
-		}
-
-		// Here the `parentOriginHash()` function from `src/vs/base/browser/iframe.ts` is inlined
-		// compute a sha-256 composed of `parentOrigin` and `salt` converted to base 32
-		/** @type {string} */
-		let parentOriginHash;
-		try {
-			const strData = JSON.stringify({ parentOrigin, salt });
-			const encoder = new TextEncoder();
-			const arrData = encoder.encode(strData);
-			const hash = await crypto.subtle.digest('sha-256', arrData);
-			const hashArray = Array.from(new Uint8Array(hash));
-			const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
-			// sha256 has 256 bits, so we need at most ceil(lg(2^256-1)/lg(32)) = 52 chars to represent it in base 32
-			parentOriginHash = BigInt(`0x${hashHex}`).toString(32).padStart(52, '0');
-		} catch (err) {
-			return sendError(err instanceof Error ? err : new Error(String(err)));
-		}
-
-		const requiredSubdomain = `${hostnameValidationMarker}${parentOriginHash}.`;
-		if (hostname.substring(0, requiredSubdomain.length) === requiredSubdomain) {
-			// validation succeeded!
-			return start();
-		}
-
-		return sendError(new Error(`Expected '${requiredSubdomain}' as subdomain!`));
+		return start();
 	})();
 
 	function sendError(error) {
@@ -114,7 +80,12 @@
 			worker.onmessage = (event) => {
 				const { data } = event;
 
-				if (data?.type === '_newWorker') {
+				if (data?.type === '_port') {
+					window.parent.postMessage({
+						from: vscodeWebWorkerExtHostId,
+						port: data.port
+					}, parentOrigin, [data.port]);
+				} else if (data?.type === '_newWorker') {
 					const { id, port, url, options } = data;
 					const newWorker = new Worker(url, options);
 					newWorker.postMessage(port, [port]);
