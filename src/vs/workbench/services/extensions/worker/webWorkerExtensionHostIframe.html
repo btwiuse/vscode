@@ -4,7 +4,7 @@
 		<meta http-equiv="Content-Security-Policy" content="
 			default-src 'none';
 			child-src 'self' data: blob:;
-			script-src 'self' 'unsafe-eval' 'sha256-c8thgD+1oN4/vlEAklpmXmsovnj5avm4D6O+BpUcKdU=' https: http://localhost:* blob:;
+			script-src 'self' 'unsafe-eval' 'unsafe-inline' https: http://localhost:* blob:;
 			connect-src 'self' https: wss: http://localhost:* http://127.0.0.1:* ws://localhost:* ws://127.0.0.1:*;"/>
 	</head>
 	<body>
@@ -83,7 +83,17 @@
 				if (data?.type === '_port') {
 					window.parent.postMessage({
 						from: vscodeWebWorkerExtHostId,
-						port: data.port
+						...data,
+					}, parentOrigin, [data.port]);
+				} else if (data?.type === '_bridge') {
+					window.parent.postMessage({
+						from: vscodeWebWorkerExtHostId,
+						...data,
+					}, parentOrigin);
+				} else if (data?.type === '_bridge_port') {
+					window.parent.postMessage({
+						from: vscodeWebWorkerExtHostId,
+						...data,
 					}, parentOrigin, [data.port]);
 				} else if (data?.type === '_newWorker') {
 					const { id, port, url, options } = data;
