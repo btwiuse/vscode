@@ -265,8 +265,7 @@ class SaveWorkspaceAsAction extends Action2 {
 			id: SaveWorkspaceAsAction.ID,
 			title: localize2('saveWorkspaceAsAction', 'Save Workspace As...'),
 			category: workspacesCategory,
-			f1: true,
-			precondition: EnterMultiRootWorkspaceSupportContext
+			f1: true
 		});
 	}
 
@@ -402,8 +401,7 @@ MenuRegistry.appendMenuItem(MenuId.MenubarFileMenu, {
 		id: SaveWorkspaceAsAction.ID,
 		title: localize('miSaveWorkspaceAs', "Save Workspace As...")
 	},
-	order: 2,
-	when: EnterMultiRootWorkspaceSupportContext
+	order: 2
 });
 
 MenuRegistry.appendMenuItem(MenuId.MenubarFileMenu, {
