@@ -7,7 +7,6 @@ import * as fs from 'fs';
 import type * as http from 'http';
 import * as net from 'net';
 import { createRequire } from 'node:module';
-import { performance } from 'perf_hooks';
 import { VSBuffer } from '../../base/common/buffer.js';
 import { CharCode } from '../../base/common/charCode.js';
 import { isSigPipeError, onUnexpectedError, setUnexpectedErrorHandler } from '../../base/common/errors.js';
@@ -747,7 +746,7 @@ export async function createServer(address: string | net.AddressInfo | null, arg
 	const remoteExtensionHostAgentServer = instantiationService.createInstance(RemoteExtensionHostAgentServer, socketServer, connectionToken, vsdaMod, hasWebClient, serverBasePath);
 
 	perf.mark('code/server/ready');
-	const currentTime = performance.now();
+	const currentTime = 0;
 	// eslint-disable-next-line local/code-no-any-casts
 	const vscodeServerStartTime: number = (<any>global).vscodeServerStartTime;
 	// eslint-disable-next-line local/code-no-any-casts

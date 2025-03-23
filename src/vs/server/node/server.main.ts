@@ -11,13 +11,12 @@ import { run as runCli } from './remoteExtensionHostAgentCli.js';
 import { createServer as doCreateServer, IServerAPI } from './remoteExtensionHostAgentServer.js';
 import { parseArgs, ErrorReporter } from '../../platform/environment/node/argv.js';
 import { join, dirname } from '../../base/common/path.js';
-import { performance } from 'perf_hooks';
 import { agentHostBridgeConnectionTokenEnvironmentVariable, serverOptions } from './serverEnvironmentService.js';
 import product from '../../platform/product/common/product.js';
 import * as perf from '../../base/common/performance.js';
 
 perf.mark('code/server/codeLoaded');
-(global as unknown as { vscodeServerCodeLoadedTime?: number }).vscodeServerCodeLoadedTime = performance.now();
+(global as unknown as { vscodeServerCodeLoadedTime?: number }).vscodeServerCodeLoadedTime = 0;
 
 const errorReporter: ErrorReporter = {
 	onMultipleValues: (id: string, usedValue: string) => {
