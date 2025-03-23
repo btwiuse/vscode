@@ -15,7 +15,7 @@ use_vscode && {
   curl -sL https://vscode.download.prss.microsoft.com/dbazure/download/$QUALITY/$COMMIT/vscode-web.tar.gz | tar xz --strip=1
 } || {
   echo "Using vscodium web"
-  VERSION=1.96.4.25081
+  VERSION="1.100.0.$(env TZ=Asia/Taipei date +%y%j)"
   curl -sL https://github.com/btwiuse/vscodium/releases/download/$VERSION/vscodium-web-$VERSION.tar.gz | tar xz
 }
 
