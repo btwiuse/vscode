@@ -95,6 +95,7 @@ export function getDefaultUserDataPath(productName: string): string {
 		case 'darwin':
 			appDataPath = join(homedir(), 'Library', 'Application Support');
 			break;
+		case 'android':
 		case 'linux':
 			appDataPath = process.env['XDG_CONFIG_HOME'] || join(homedir(), '.config');
 			break;

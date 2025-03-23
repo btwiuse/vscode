@@ -74,6 +74,22 @@ export class ExtensionsDownloader extends Disposable {
 			return { location, verificationStatus: ExtensionSignatureVerificationCode.NotSigned };
 		}
 
+		return { location, verificationStatus: ExtensionSignatureVerificationCode.Success };
+	}
+
+	async _download(extension: IGalleryExtension, operation: InstallOperation, verifySignature: boolean, clientTargetPlatform?: TargetPlatform): Promise<{ readonly location: URI; readonly verificationStatus: ExtensionSignatureVerificationCode | undefined }> {
+		await this.cleanUpPromise;
+
+		const location = await this.downloadVSIX(extension, operation);
+
+		if (!verifySignature) {
+			return { location, verificationStatus: undefined };
+		}
+
+		if (!extension.isSigned) {
+			return { location, verificationStatus: ExtensionSignatureVerificationCode.NotSigned };
+		}
+
 		let signatureArchiveLocation;
 		try {
 			signatureArchiveLocation = await this.downloadSignatureArchive(extension);

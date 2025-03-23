@@ -6,7 +6,6 @@
 import { networkInterfaces } from 'os';
 import { TernarySearchTree } from '../common/ternarySearchTree.js';
 import * as uuid from '../common/uuid.js';
-import { getMac } from './macAddress.js';
 import { isWindows } from '../common/platform.js';
 import { stripUTF8BOM } from '../common/strings.js';
 
@@ -82,24 +81,11 @@ let machineId: Promise<string>;
 export async function getMachineId(errorLogger: (error: Error) => void): Promise<string> {
 	if (!machineId) {
 		machineId = (async () => {
-			const id = await getMacMachineId(errorLogger);
-
-			return id || uuid.generateUuid(); // fallback, generate a UUID
+			return uuid.generateUuid();
 		})();
 	}
 
 	return machineId;
-}
-
-async function getMacMachineId(errorLogger: (error: Error) => void): Promise<string | undefined> {
-	try {
-		const crypto = await import('crypto');
-		const macAddress = getMac();
-		return crypto.createHash('sha256').update(macAddress, 'utf8').digest('hex');
-	} catch (err) {
-		errorLogger(err);
-		return undefined;
-	}
 }
 
 const SQM_KEY: string = 'Software\\Microsoft\\SQMClient';
@@ -118,11 +104,11 @@ export async function getSqmMachineId(errorLogger: (error: Error) => void): Prom
 
 export async function getDevDeviceId(errorLogger: (error: Error) => void): Promise<string> {
 	try {
+		return uuid.generateUuid();
+	} catch (err) {
+		errorLogger(err);
 		const deviceIdPackage = await import('@vscode/deviceid');
 		const id = await deviceIdPackage.getDeviceId();
 		return stripUTF8BOM(id);
-	} catch (err) {
-		errorLogger(err);
-		return uuid.generateUuid();
 	}
 }
