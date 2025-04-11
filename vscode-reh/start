@@ -1,6 +1,6 @@
 cd $(dirname $0)
 
-VERSION=1.100.0.25098
+VERSION=1.100.0.25101
 
 curl -sL https://github.com/btwiuse/vscodium/releases/download/$VERSION/vscodium-reh-linux-x64-$VERSION.tar.gz | tar xz
 
