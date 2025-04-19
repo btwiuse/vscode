@@ -1,0 +1,80 @@
+name: Rebase onto Upstream
+
+on:
+  schedule:
+    - cron: '0 * * * *'  # ⏰ Every hour
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  rebase:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout your forked main branch
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0  # Needed to rebase properly
+
+      - name: Set Git user
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Add upstream remote
+        run: |
+          git remote add upstream https://github.com/microsoft/vscode.git
+          git fetch upstream
+
+      - name: Create backup branch (in case of conflict)
+        run: |
+          git branch backup-main-before-rebase
+
+      - name: Attempt rebase onto upstream/main
+        id: rebase
+        run: |
+          if git rebase upstream/main; then
+            echo "Rebase successful"
+          else
+            echo "Rebase conflict, aborting..."
+            git rebase --abort
+            git reset --hard backup-main-before-rebase
+            echo "REBASE_FAILED=true" >> $GITHUB_ENV
+          fi
+
+      - name: Check if HEAD is updated after rebase
+        id: head_check
+        run: |
+          CURRENT_HEAD=$(git rev-parse HEAD)
+          git fetch origin main
+          REMOTE_HEAD=$(git rev-parse origin/main)
+          if [ "$CURRENT_HEAD" != "$REMOTE_HEAD" ]; then
+            echo "HEAD_UPDATED=true" >> $GITHUB_ENV
+          else
+            echo "HEAD_UPDATED=false" >> $GITHUB_ENV
+          fi
+
+      - name: Trigger vscodium build
+        if: env.REBASE_FAILED != 'true' && env.HEAD_UPDATED == 'true'
+        run: |
+          curl -X POST \
+            -H "Accept: application/vnd.github+json" \
+            -H "Authorization: Bearer ${{ secrets.PAT_TOKEN }}" \
+            https://api.github.com/repos/btwiuse/vscodium/dispatches \
+            -d '{"event_type":"stable"}'
+
+      - name: Push changes if rebase was successful
+        if: env.REBASE_FAILED != 'true'
+        run: |
+          git push origin main --force
+
+      - name: Cleanup backup branch
+        if: always()
+        run: |
+          git branch -D backup-main-before-rebase || true
