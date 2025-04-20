@@ -27,6 +27,9 @@ cp -v ../resources/server/{*.png,*.ico,*.json} .
 cp -v ../codigo.svg ./out/media/code-icon.svg
 cp -v ../letterpress-*.svg ./out/media/
 
+npx -y node-jq --arg now "$(node -p 'new Date().toISOString()')" '.date = $now' product.json > /tmp/product.json
+cp -v /tmp/product.json product.json
+
 [[ -n $RAILWAY_ENVIRONMENT ]] && {
   ufo term &
   env RELAY=:$PORT ufo pub .
