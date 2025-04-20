@@ -10,23 +10,13 @@ import { ThemeSettingDefaults } from '../../../../services/themes/common/workben
 export default () => `
 <checklist>
 	<div class="theme-picker-row">
-		<checkbox when-checked="setTheme:${ThemeSettingDefaults.COLOR_THEME_DARK_COLORBLIND}" checked-on="config.workbench.colorTheme == '${ThemeSettingDefaults.COLOR_THEME_DARK_COLORBLIND}'">
+		<checkbox when-checked="setTheme:${ThemeSettingDefaults.COLOR_THEME_DARK}" checked-on="config.workbench.colorTheme == '${ThemeSettingDefaults.COLOR_THEME_DARK}'">
 			<img width="200" src="./dark-colorblind.png"/>
 			${escape(localize('dark-colorblind', "Dark Colorblind"))}
 		</checkbox>
-		<checkbox when-checked="setTheme:${ThemeSettingDefaults.COLOR_THEME_LIGHT_COLORBLIND}" checked-on="config.workbench.colorTheme == '${ThemeSettingDefaults.COLOR_THEME_LIGHT_COLORBLIND}'">
+		<checkbox when-checked="setTheme:${ThemeSettingDefaults.COLOR_THEME_LIGHT}" checked-on="config.workbench.colorTheme == '${ThemeSettingDefaults.COLOR_THEME_LIGHT}'">
 			<img width="200" src="./light-colorblind.png"/>
 			${escape(localize('light-colorblind', "Light Colorblind"))}
-		</checkbox>
-	</div>
-	<div class="theme-picker-row">
-		<checkbox when-checked="setTheme:${ThemeSettingDefaults.COLOR_THEME_DARK}" checked-on="config.workbench.colorTheme == '${ThemeSettingDefaults.COLOR_THEME_DARK}'">
-			<img width="200" src="./dark.png"/>
-			${escape(localize('dark', "Dark Modern"))}
-		</checkbox>
-		<checkbox when-checked="setTheme:${ThemeSettingDefaults.COLOR_THEME_LIGHT}" checked-on="config.workbench.colorTheme == '${ThemeSettingDefaults.COLOR_THEME_LIGHT}'">
-			<img width="200" src="./light.png"/>
-			${escape(localize('light', "Light Modern"))}
 		</checkbox>
 	</div>
 	<div class="theme-picker-row">
