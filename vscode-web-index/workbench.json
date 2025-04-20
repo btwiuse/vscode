@@ -9,7 +9,7 @@
   "productConfiguration": {
     "embedderIdentifier": "web"
   },
-  "additionalBuiltinExtensions": [
+  "_disabledBuiltinExtensions": [
     {
       "scheme": "https",
       "path": "/extensions/bat"
@@ -36,27 +36,11 @@
     },
     {
       "scheme": "https",
-      "path": "/extensions/css"
-    },
-    {
-      "scheme": "https",
-      "path": "/extensions/css-language-features"
-    },
-    {
-      "scheme": "https",
       "path": "/extensions/dart"
     },
     {
       "scheme": "https",
-      "path": "/extensions/diff"
-    },
-    {
-      "scheme": "https",
       "path": "/extensions/docker"
-    },
-    {
-      "scheme": "https",
-      "path": "/extensions/emmet"
     },
     {
       "scheme": "https",
@@ -72,14 +56,6 @@
     },
     {
       "scheme": "https",
-      "path": "/extensions/github-authentication"
-    },
-    {
-      "scheme": "https",
-      "path": "/extensions/go"
-    },
-    {
-      "scheme": "https",
       "path": "/extensions/groovy"
     },
     {
@@ -92,11 +68,7 @@
     },
     {
       "scheme": "https",
-      "path": "/extensions/html"
-    },
-    {
-      "scheme": "https",
-      "path": "/extensions/html-language-features"
+      "path": "/extensions/npm"
     },
     {
       "scheme": "https",
@@ -104,23 +76,7 @@
     },
     {
       "scheme": "https",
-      "path": "/extensions/ipynb"
-    },
-    {
-      "scheme": "https",
       "path": "/extensions/java"
-    },
-    {
-      "scheme": "https",
-      "path": "/extensions/javascript"
-    },
-    {
-      "scheme": "https",
-      "path": "/extensions/json"
-    },
-    {
-      "scheme": "https",
-      "path": "/extensions/json-language-features"
     },
     {
       "scheme": "https",
@@ -141,42 +97,6 @@
     {
       "scheme": "https",
       "path": "/extensions/lua"
-    },
-    {
-      "scheme": "https",
-      "path": "/extensions/make"
-    },
-    {
-      "scheme": "https",
-      "path": "/extensions/markdown-basics"
-    },
-    {
-      "scheme": "https",
-      "path": "/extensions/markdown-language-features"
-    },
-    {
-      "scheme": "https",
-      "path": "/extensions/markdown-math"
-    },
-    {
-      "scheme": "https",
-      "path": "/extensions/media-preview"
-    },
-    {
-      "scheme": "https",
-      "path": "/extensions/merge-conflict"
-    },
-    {
-      "scheme": "https",
-      "path": "/extensions/microsoft-authentication"
-    },
-    {
-      "scheme": "https",
-      "path": "/extensions/notebook-renderers"
-    },
-    {
-      "scheme": "https",
-      "path": "/extensions/npm"
     },
     {
       "scheme": "https",
@@ -224,10 +144,6 @@
     },
     {
       "scheme": "https",
-      "path": "/extensions/rust"
-    },
-    {
-      "scheme": "https",
       "path": "/extensions/scss"
     },
     {
@@ -244,10 +160,6 @@
     },
     {
       "scheme": "https",
-      "path": "/extensions/simple-browser"
-    },
-    {
-      "scheme": "https",
       "path": "/extensions/sql"
     },
     {
@@ -257,10 +169,6 @@
     {
       "scheme": "https",
       "path": "/extensions/theme-abyss"
-    },
-    {
-      "scheme": "https",
-      "path": "/extensions/theme-defaults"
     },
     {
       "scheme": "https",
@@ -284,10 +192,6 @@
     },
     {
       "scheme": "https",
-      "path": "/extensions/theme-seti"
-    },
-    {
-      "scheme": "https",
       "path": "/extensions/theme-solarized-dark"
     },
     {
@@ -300,19 +204,117 @@
     },
     {
       "scheme": "https",
-      "path": "/extensions/typescript-basics"
-    },
-    {
-      "scheme": "https",
-      "path": "/extensions/typescript-language-features"
-    },
-    {
-      "scheme": "https",
       "path": "/extensions/vb"
     },
     {
       "scheme": "https",
       "path": "/extensions/xml"
+    }
+  ],
+  "additionalBuiltinExtensions": [
+    {
+      "scheme": "https",
+      "path": "/extensions/css"
+    },
+    {
+      "scheme": "https",
+      "path": "/extensions/css-language-features"
+    },
+    {
+      "scheme": "https",
+      "path": "/extensions/diff"
+    },
+    {
+      "scheme": "https",
+      "path": "/extensions/emmet"
+    },
+    {
+      "scheme": "https",
+      "path": "/extensions/github-authentication"
+    },
+    {
+      "scheme": "https",
+      "path": "/extensions/go"
+    },
+    {
+      "scheme": "https",
+      "path": "/extensions/html"
+    },
+    {
+      "scheme": "https",
+      "path": "/extensions/html-language-features"
+    },
+    {
+      "scheme": "https",
+      "path": "/extensions/ipynb"
+    },
+    {
+      "scheme": "https",
+      "path": "/extensions/javascript"
+    },
+    {
+      "scheme": "https",
+      "path": "/extensions/json"
+    },
+    {
+      "scheme": "https",
+      "path": "/extensions/json-language-features"
+    },
+    {
+      "scheme": "https",
+      "path": "/extensions/make"
+    },
+    {
+      "scheme": "https",
+      "path": "/extensions/markdown-basics"
+    },
+    {
+      "scheme": "https",
+      "path": "/extensions/markdown-language-features"
+    },
+    {
+      "scheme": "https",
+      "path": "/extensions/markdown-math"
+    },
+    {
+      "scheme": "https",
+      "path": "/extensions/media-preview"
+    },
+    {
+      "scheme": "https",
+      "path": "/extensions/merge-conflict"
+    },
+    {
+      "scheme": "https",
+      "path": "/extensions/microsoft-authentication"
+    },
+    {
+      "scheme": "https",
+      "path": "/extensions/notebook-renderers"
+    },
+    {
+      "scheme": "https",
+      "path": "/extensions/rust"
+    },
+    {
+      "scheme": "https",
+      "path": "/extensions/simple-browser"
+    },
+    {
+      "scheme": "https",
+      "path": "/extensions/theme-defaults"
+    },
+    {
+      "scheme": "https",
+      "path": "/extensions/theme-seti"
+    },
+    {
+      "scheme": "https",
+      "path": "/extensions/typescript-basics"
+    },
+    {
+      "scheme": "https",
+      "path": "/extensions/typescript-language-features"
     },
     {
       "scheme": "https",
