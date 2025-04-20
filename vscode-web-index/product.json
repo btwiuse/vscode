@@ -121,21 +121,33 @@
     "ms-vscode.vscode-commander"
   ],
   "extensionEnabledApiProposals": {
-    "vscode.simple-browser": ["externalUriOpener"],
+    "vscode.simple-browser": [
+      "externalUriOpener"
+    ],
     "vscode.typescript-language-features": [
       "workspaceTrust",
       "multiDocumentHighlightProvider",
       "codeActionAI",
       "codeActionRanges"
     ],
-    "vscode.configuration-editing": ["profileContentHandlers"],
-    "vscode.ipynb": ["diffContentOptions"],
-    "vscode.html-language-features": ["extensionsAny"],
-    "vscode.microsoft-authentication": ["idToken", "nativeWindowHandle"],
-    "vscode.npm": ["terminalQuickFixProvider"],
-    "vscode.search-result": ["documentFiltersExclusive"],
     "vscode.configuration-editing": [
       "profileContentHandlers"
+    ],
+    "vscode.ipynb": [
+      "diffContentOptions"
+    ],
+    "vscode.html-language-features": [
+      "extensionsAny"
+    ],
+    "vscode.microsoft-authentication": [
+      "idToken",
+      "nativeWindowHandle"
+    ],
+    "vscode.npm": [
+      "terminalQuickFixProvider"
+    ],
+    "vscode.search-result": [
+      "documentFiltersExclusive"
     ],
     "vscode.json-language-features": [
       "extensionsAny"
@@ -167,7 +179,9 @@
       "workspaceTrust",
       "tunnels"
     ],
-    "ms-toolsai.vscode-ai-remote": ["resolvers"],
+    "ms-toolsai.vscode-ai-remote": [
+      "resolvers"
+    ],
     "ms-python.python": [
       "codeActionAI",
       "contribEditorContentMenu",
@@ -180,7 +194,9 @@
       "notebookReplDocument",
       "notebookVariableProvider"
     ],
-    "ms-dotnettools.dotnet-interactive-vscode": ["notebookMessaging"],
+    "ms-dotnettools.dotnet-interactive-vscode": [
+      "notebookMessaging"
+    ],
     "GitHub.codespaces": [
       "contribEditSessions",
       "contribMenuBarHome",
@@ -232,7 +248,11 @@
       "contribViewsRemote",
       "telemetry"
     ],
-    "ms-vscode.remote-server": ["resolvers", "tunnels", "contribViewsWelcome"],
+    "ms-vscode.remote-server": [
+      "resolvers",
+      "tunnels",
+      "contribViewsWelcome"
+    ],
     "ms-vscode.remote-explorer": [
       "contribRemoteHelp",
       "contribViewsRemote",
@@ -254,8 +274,12 @@
       "workspaceTrust",
       "tunnels"
     ],
-    "ms-vscode.lsif-browser": ["documentFiltersExclusive"],
-    "ms-vscode.vscode-speech": ["speech"],
+    "ms-vscode.lsif-browser": [
+      "documentFiltersExclusive"
+    ],
+    "ms-vscode.vscode-speech": [
+      "speech"
+    ],
     "GitHub.vscode-pull-request-github": [
       "activeComment",
       "codiconDecoration",
@@ -339,15 +363,21 @@
       "textSearchProvider",
       "timeline"
     ],
-    "GitHub.copilot-nes": ["inlineEdit"],
-    "ms-python.gather": ["notebookCellExecutionState"],
+    "GitHub.copilot-nes": [
+      "inlineEdit"
+    ],
+    "ms-python.gather": [
+      "notebookCellExecutionState"
+    ],
     "ms-python.vscode-pylance": [],
     "ms-python.debugpy": [
       "contribViewsWelcome",
       "debugVisualization",
       "portsAttributes"
     ],
-    "ms-toolsai.jupyter-renderers": ["contribNotebookStaticPreloads"],
+    "ms-toolsai.jupyter-renderers": [
+      "contribNotebookStaticPreloads"
+    ],
     "ms-toolsai.jupyter": [
       "notebookDeprecated",
       "notebookMessaging",
@@ -364,15 +394,29 @@
       "notebookVariableProvider",
       "notebookReplDocument"
     ],
-    "ms-toolsai.tensorboard": ["portsAttributes"],
+    "ms-toolsai.tensorboard": [
+      "portsAttributes"
+    ],
     "dbaeumer.vscode-eslint": [],
-    "ms-vscode.azure-sphere-tools-ui": ["tunnels"],
-    "ms-azuretools.vscode-azureappservice": ["terminalDataWriteEvent"],
-    "ms-vscode.anycode": ["extensionsAny"],
-    "ms-vscode.cpptools": ["terminalDataWriteEvent"],
+    "ms-vscode.azure-sphere-tools-ui": [
+      "tunnels"
+    ],
+    "ms-azuretools.vscode-azureappservice": [
+      "terminalDataWriteEvent"
+    ],
+    "ms-vscode.anycode": [
+      "extensionsAny"
+    ],
+    "ms-vscode.cpptools": [
+      "terminalDataWriteEvent"
+    ],
     "redhat.java": [],
-    "ms-dotnettools.csdevkit": ["inlineCompletionsAdditions"],
-    "ms-dotnettools.vscodeintellicode-csharp": ["inlineCompletionsAdditions"],
+    "ms-dotnettools.csdevkit": [
+      "inlineCompletionsAdditions"
+    ],
+    "ms-dotnettools.vscodeintellicode-csharp": [
+      "inlineCompletionsAdditions"
+    ],
     "microsoft-IsvExpTools.powerplatform-vscode": [
       "fileSearchProvider",
       "textSearchProvider"
@@ -443,13 +487,18 @@
     "vscode.microsoft-authentication"
   ],
   "inheritAuthAccountPreference": {
-    "github.copilot": ["github.copilot-chat"]
+    "github.copilot": [
+      "github.copilot-chat"
+    ]
   },
   "remoteExtensionTips": {
     "wsl": {
       "friendlyName": "WSL",
       "extensionId": "ms-vscode-remote.remote-wsl",
-      "supportedPlatforms": ["Windows", "Web"],
+      "supportedPlatforms": [
+        "Windows",
+        "Web"
+      ],
       "startEntry": {
         "helpLink": "https://aka.ms/vscode-remote/wsl",
         "startConnectLabel": "WSL",
@@ -460,7 +509,11 @@
     "ssh-remote": {
       "friendlyName": "Remote - SSH",
       "extensionId": "ms-vscode-remote.remote-ssh",
-      "supportedPlatforms": ["Windows", "Linux", "Mac"],
+      "supportedPlatforms": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
       "startEntry": {
         "helpLink": "https://aka.ms/vscode-remote/ssh",
         "startConnectLabel": "SSH ",
@@ -471,7 +524,11 @@
     "dev-container": {
       "friendlyName": "Dev Containers",
       "extensionId": "ms-vscode-remote.remote-containers",
-      "supportedPlatforms": ["Windows", "Linux", "Mac"],
+      "supportedPlatforms": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
       "startEntry": {
         "helpLink": "https://aka.ms/vscode-remote/containers",
         "startConnectLabel": "Dev Container",
@@ -505,5 +562,5 @@
     }
   },
   "version": "1.100.0",
-  "date": "2025-04-01T04:54:00.992Z"
+  "date": "2025-04-20T10:11:56.596Z"
 }
