@@ -26,6 +26,18 @@
         "path": "./themes/2026-dark.json"
       },
       {
+        "id": "Light Colorblind",
+        "label": "%lightColorblindThemeLabel%",
+        "uiTheme": "vs",
+        "path": "./themes/light-colorblind.json"
+      },
+      {
+        "id": "Dark Colorblind",
+        "label": "%darkColorblindThemeLabel%",
+        "uiTheme": "vs-dark",
+        "path": "./themes/dark-colorblind.json"
+      },
+      {
         "id": "Dark+",
         "label": "%darkPlusColorThemeLabel%",
         "uiTheme": "vs-dark",
