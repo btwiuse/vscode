@@ -80,11 +80,7 @@ export const virtualMachineHint: { value(): number } = new class {
 let machineId: Promise<string>;
 export async function getMachineId(errorLogger: (error: any) => void): Promise<string> {
 	if (!machineId) {
-		machineId = (async () => {
-			const id = await getMacMachineId(errorLogger);
-
-			return id || uuid.generateUuid(); // fallback, generate a UUID
-		})();
+		machineId = uuid.generateUuid();
 	}
 
 	return machineId;
