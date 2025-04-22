@@ -86,6 +86,7 @@ function doGetUserDataPath(cliArgs: NativeParsedArgs, productName: string): stri
 		case 'darwin':
 			appDataPath = join(homedir(), 'Library', 'Application Support');
 			break;
+		case 'android':
 		case 'linux':
 			appDataPath = process.env['XDG_CONFIG_HOME'] || join(homedir(), '.config');
 			break;
