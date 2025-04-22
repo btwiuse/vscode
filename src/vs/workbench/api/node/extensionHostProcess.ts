@@ -4,7 +4,6 @@
  *--------------------------------------------------------------------------------------------*/
 
 import minimist from 'minimist';
-import * as nativeWatchdog from '@vscode/native-watchdog';
 import * as net from 'net';
 import { ProcessTimeRunOnceScheduler } from '../../../base/common/async.js';
 import { VSBuffer } from '../../../base/common/buffer.js';
@@ -369,18 +368,6 @@ function connectToRenderer(protocol: IMessagePassingProtocol): Promise<IRenderer
 						}
 					}
 				}, 1000);
-
-				// In certain cases, the event loop can become busy and never yield
-				// e.g. while-true or process.nextTick endless loops
-				// So also use the native node module to do it from a separate thread
-				let watchdog: typeof nativeWatchdog;
-				try {
-					watchdog = require('@vscode/native-watchdog');
-					watchdog.start(initData.parentPid);
-				} catch (err) {
-					// no problem...
-					onUnexpectedError(err);
-				}
 			}
 
 			// Tell the outside that we are initialized
