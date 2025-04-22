@@ -1,6 +1,6 @@
 cd $(dirname $0)
 
-VERSION="1.100.0.$(date +%y%j)"
+VERSION="1.100.0.$(env TZ=Asia/Taipei date +%y%j)"
 
 curl -sL https://github.com/btwiuse/vscodium/releases/download/$VERSION/vscodium-reh-linux-x64-$VERSION.tar.gz | tar xz
 
