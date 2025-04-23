@@ -8,7 +8,8 @@ curl -sL https://github.com/btwiuse/vscodium/releases/download/$VERSION/vscodium
   ufo upgrade
   ufo term &
   env RELAY=:$PORT ufo pub :1$PORT &
-  ./bin/codium-server --host 0.0.0.0 --port 1$PORT --without-connection-token --start-server --install-extension saoudrizwan.claude-dev
+  ./bin/codium-server --host 0.0.0.0 --port 1$PORT --without-connection-token --start-server --install-extension saoudrizwan.claude-dev || \
+  ./bin/code-server-oss --host 0.0.0.0 --port 1$PORT --without-connection-token --start-server --install-extension saoudrizwan.claude-dev
 } || {
   true
 }
