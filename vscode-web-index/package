@@ -1,38 +1,64 @@
+#!/usr/bin/env bash
+
+set -e
+set -o pipefail
+
 cd $(dirname $0)
+pwd
 
-WEB_ONLY=../../vscode-web-only
-
-QUALITY=insider
-COMMIT=$(curl -sL https://update.code.visualstudio.com/api/update/web-standalone/$QUALITY/latest | npx -y node-jq .version -r)
+WWW=www
+mkdir -pv $WWW
 
 function use_vscode() {
   false
 }
 
+VERSION="1.100.0.$(env TZ=Asia/Taipei date +%y%j)"
+echo "VERSION=$VERSION"
+
+echo "Downloading web-only"
+WEB_ONLY=../../vscode-web-only
+WEB_ONLY=./web-only
+mkdir -p $WEB_ONLY
+curl -#L https://github.com/btwiuse/vscodium/releases/download/$VERSION/vscodium-web-only-$VERSION.tar.gz | tar -xzC $WEB_ONLY
+
 use_vscode && {
+  echo "Using vscode web"
+  QUALITY=stable
+  QUALITY=exploration
+  QUALITY=insider
+  COMMIT=$(curl -sL https://update.code.visualstudio.com/api/update/web-standalone/$QUALITY/latest | npx -y node-jq .version -r)
+
   echo "Using vscode COMMIT=$COMMIT"
 
-  curl -sL https://vscode.download.prss.microsoft.com/dbazure/download/$QUALITY/$COMMIT/vscode-web.tar.gz | tar xz --strip=1
+  curl -sL https://vscode.download.prss.microsoft.com/dbazure/download/$QUALITY/$COMMIT/vscode-web.tar.gz | tar -xzC $WWW --strip=1
 } || {
   echo "Using vscodium web"
-  VERSION="1.100.0.$(env TZ=Asia/Taipei date +%y%j)"
-  curl -sL https://github.com/btwiuse/vscodium/releases/download/$VERSION/vscodium-web-$VERSION.tar.gz | tar xz
+  curl -#L https://github.com/btwiuse/vscodium/releases/download/$VERSION/vscodium-web-$VERSION.tar.gz | tar -xzC $WWW
 }
 
-# cp -v product.json config.json index.html vscode-web
+mkdir -p $WWW/out/vs/code/browser/workbench/
+cp -v $WEB_ONLY/vs/code/browser/workbench/{callback.html,web-only*} $WWW/out/vs/code/browser/workbench/
+cp -v ../resources/server/{*.png,*.ico,*.json} $WWW
+cp -v ../codigo.svg $WWW/out/media/code-icon.svg
+cp -v ../letterpress-*.svg $WWW/out/media/
 
-mkdir -p ./out/vs/code/browser/workbench/
-cp -v $WEB_ONLY/vs/code/browser/workbench/{callback.html,web-only*} ./out/vs/code/browser/workbench/
-cp -v ../resources/server/{*.png,*.ico,*.json} .
-cp -v ../codigo.svg ./out/media/code-icon.svg
-cp -v ../letterpress-*.svg ./out/media/
+cp -v workbench.json index.html $WWW
 
-npx -y node-jq --arg now "$(node -p 'new Date().toISOString()')" '.date = $now' product.json > /tmp/product.json
-cp -v /tmp/product.json product.json
+echo "Updating product.json"
+DATE="$(node -p 'new Date().toISOString()')"
+COMMIT="$(git rev-parse HEAD || echo Unknown)"
+echo "DATE=$DATE"
+echo "COMMIT=$COMMIT"
+npx -y node-jq \
+	--arg DATE "$DATE" \
+	--arg COMMIT "$COMMIT" \
+	'.date = $DATE | .commit = $COMMIT' \
+	product.json > $WWW/product.json
 
 [[ -n $RAILWAY_ENVIRONMENT ]] && {
   ufo term &
-  env RELAY=:$PORT ufo pub .
+  env RELAY=:$PORT ufo pub $WWW
 } || {
   true
 }
