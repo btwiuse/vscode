@@ -19,16 +19,6 @@ export default () => `
 			${escape(localize('light-colorblind', "Light Colorblind"))}
 		</checkbox>
 	</div>
-	<div class="theme-picker-row">
-		<checkbox when-checked="setTheme:${ThemeSettingDefaults.COLOR_THEME_HC_DARK}" checked-on="config.workbench.colorTheme == '${ThemeSettingDefaults.COLOR_THEME_HC_DARK}'">
-			<img width="200" src="./dark-hc.png"/>
-			${escape(localize('HighContrast', "Dark High Contrast"))}
-		</checkbox>
-		<checkbox when-checked="setTheme:${ThemeSettingDefaults.COLOR_THEME_HC_LIGHT}" checked-on="config.workbench.colorTheme == '${ThemeSettingDefaults.COLOR_THEME_HC_LIGHT}'">
-			<img width="200" src="./light-hc.png"/>
-			${escape(localize('HighContrastLight', "Light High Contrast"))}
-		</checkbox>
-	</div>
 </checklist>
 <checkbox class="theme-picker-link" when-checked="command:workbench.action.selectTheme" checked-on="false">
 	${escape(localize('seeMore', "See More Themes..."))}
