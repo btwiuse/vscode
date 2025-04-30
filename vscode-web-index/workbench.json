@@ -1,6 +1,9 @@
 {
   "_webviewEndpoint": "/out/vs/workbench/contrib/webview/browser/pre",
   "_remoteAuthority": "vscode",
+  "settingsSyncOptions": {
+    "enabled": true
+  },
   "serverBasePath": "/",
   "developmentOptions": {
     "logLevel": 3
