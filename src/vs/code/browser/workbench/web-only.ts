@@ -22,6 +22,8 @@ import type { IURLCallbackProvider } from '../../../workbench/services/url/brows
 import { create } from '../../../workbench/workbench.web.main.internal.js';
 import { ICommand, Menu } from '../../../workbench/browser/web.api.js';
 import { IProductQualityChangeHandler } from '../../../workbench/browser/web.api.js';
+import { IWelcomeBanner } from '../../../workbench/browser/web.api.js';
+import { localize } from '../../..//nls.js';
 
 interface ISecretStorageCrypto {
 	seal(data: string): Promise<string>;
@@ -515,6 +517,21 @@ const patchABE = (config: any) => {
     window.location.href = `${window.location.origin}?${queryString}`;
   };
 
+  // Welcome Banner
+  const welcomeBanner: IWelcomeBanner = {
+    message: localize(
+      "welcomeBannerMessage",
+      "{0} Web. Browser based playground for testing.",
+      product.nameShort
+    ),
+    actions: [
+      {
+        href: "https://github.com/microsoft/vscode",
+        label: localize("learnMore", "Learn More"),
+      },
+    ],
+  };
+
 	// Create workbench
 	create(mainWindow.document.body, {
 		...config,
@@ -528,5 +545,6 @@ const patchABE = (config: any) => {
 			: new LocalStorageSecretStorageProvider(new TransparentCrypto()),
 		remoteAuthority: remoteAuthority(config),
 		productQualityChangeHandler,
+		welcomeBanner,
 	});
 })();
