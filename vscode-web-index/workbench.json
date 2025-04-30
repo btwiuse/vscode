@@ -1,6 +1,21 @@
 {
   "_webviewEndpoint": "/out/vs/workbench/contrib/webview/browser/pre",
   "_remoteAuthority": "vscode",
+  "configurationDefaults": {
+    "terminal.integrated.copyOnSelection": true,
+    "terminal.integrated.enablePersistentSessions": true,
+    "terminal.integrated.gpuAcceleration": "off",
+    "terminal.integrated.enableImages": true,
+    "terminal.integrated.suggest.enabled": true,
+    "telemetry.enableTelemetry": false,
+    "telemetry.enableCrashReporter": false,
+    "telemetry.telemetryLevel": "off",
+    "workbench.sideBar.location": "right",
+    "workbench.startupEditor": "none"
+  },
+  "settingsSyncOptions": {
+    "enabled": true
+  },
   "serverBasePath": "/",
   "developmentOptions": {
     "logLevel": 3
@@ -208,6 +223,10 @@
     },
     {
       "scheme": "https",
+      "path": "/extensions/microsoft-authentication"
+    },
+    {
+      "scheme": "https",
       "path": "/extensions/xml"
     }
   ],
@@ -283,10 +302,6 @@
     {
       "scheme": "https",
       "path": "/extensions/merge-conflict"
-    },
-    {
-      "scheme": "https",
-      "path": "/extensions/microsoft-authentication"
     },
     {
       "scheme": "https",
