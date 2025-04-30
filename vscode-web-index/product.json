@@ -1,5 +1,6 @@
 {
   "commit": "5555555555555555555555555555555555555555",
+  "quality": "stable",
   "extensionsGallery": {
     "serviceUrl": "https://no-cors.deno.dev/https://marketplace.visualstudio.com/_apis/public/gallery",
     "resourceUrlTemplate": "https://no-cors.deno.dev/https://{publisher}.vscode-unpkg.net/{publisher}/{name}/{version}/{path}",
