@@ -24,7 +24,6 @@ import { ICommand, Menu } from '../../../workbench/browser/web.api.js';
 import { IProductQualityChangeHandler } from '../../../workbench/browser/web.api.js';
 import { IWelcomeBanner } from '../../../workbench/browser/web.api.js';
 import { localize } from '../../..//nls.js';
-import { TunnelOptions, TunnelCreationOptions } from '../../../platform/tunnel/common/tunnel.js';
 
 interface ISecretStorageCrypto {
 	seal(data: string): Promise<string>;
@@ -547,17 +546,5 @@ const patchABE = (config: any) => {
 		remoteAuthority: remoteAuthority(config),
 		productQualityChangeHandler,
 		welcomeBanner,
-		tunnelProvider: {
-			forwardPort: async (tunnelOptions: TunnelOptions, _tunnelCreationOptions: TunnelCreationOptions) => {
-				console.log('Forwarding port:', tunnelOptions.port);
-				return {
-					dispose: () => {
-						console.log('Disposing tunnel for port:', tunnelOptions.port);
-					},
-					remoteAddress: { port: tunnelOptions.port, host: 'localhost' },
-					localAddress: 'localhost:' + tunnelOptions.port
-				};
-			}
-		},
 	});
 })();
