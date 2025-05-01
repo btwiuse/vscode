@@ -262,8 +262,26 @@ function remoteAuthority(config: IWorkbenchConstructionOptions) {
 
 function connectionToken(config: IWorkbenchConstructionOptions) {
    const url = new URL(document.location.href);
-   const tkn = url.searchParams.get('tkn') || config.connectionToken;
-   return tkn === null || tkn === '' ? undefined : tkn;
+   const tknQueryParam = 'tkn';
+   const tknStorageKey = `${tknQueryParam}.${remoteAuthority(config)}`;
+
+   const tkn = url.searchParams.get(tknQueryParam);
+   if (tkn && tkn !== '') {
+      localStorage.setItem(tknStorageKey, tkn);
+      url.searchParams.delete(tknQueryParam);
+      const cleanUrl = window.location.pathname +
+	 (url.searchParams.toString() ? `?${url.searchParams.toString()}` : '') +
+	 window.location.hash;
+      window.history.replaceState({}, document.title, cleanUrl);
+      return tkn;
+   }
+
+   const storedToken = localStorage.getItem(tknStorageKey);
+   if (storedToken && storedToken !== '') {
+      return storedToken;
+   }
+
+   return config.connectionToken;
 }
 
 class WorkspaceProvider implements IWorkspaceProvider {
