@@ -260,6 +260,12 @@ function remoteAuthority(config: IWorkbenchConstructionOptions) {
    return authority === null || authority === '' ? undefined : authority;
 }
 
+function connectionToken(config: IWorkbenchConstructionOptions) {
+   const url = new URL(document.location.href);
+   const tkn = url.searchParams.get('tkn') || config.connectionToken;
+   return tkn === null || tkn === '' ? undefined : tkn;
+}
+
 class WorkspaceProvider implements IWorkspaceProvider {
 
 	private static QUERY_PARAM_EMPTY_WINDOW = 'ew';
@@ -544,6 +550,7 @@ const patchABE = (config: any) => {
 			? undefined /* with a remote without embedder-preferred storage, store on the remote */
 			: new LocalStorageSecretStorageProvider(new TransparentCrypto()),
 		remoteAuthority: remoteAuthority(config),
+		connectionToken: connectionToken(config),
 		productQualityChangeHandler,
 		welcomeBanner,
 	});
