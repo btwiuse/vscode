@@ -122,6 +122,11 @@
     "ms-vscode.vscode-commander"
   ],
   "extensionEnabledApiProposals": {
+    "codeforx.remote-oss": [
+      "contribViewsRemote",
+      "resolvers",
+      "terminalDataWriteEvent"
+    ],
     "vscode.simple-browser": [
       "externalUriOpener"
     ],
