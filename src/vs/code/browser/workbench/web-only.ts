@@ -256,7 +256,7 @@ class LocalStorageURLCallbackProvider extends Disposable implements IURLCallback
 
 function remoteAuthority(config: IWorkbenchConstructionOptions) {
    const url = new URL(document.location.href);
-   const authority = url.searchParams.get('remoteAuthority') || config.remoteAuthority;
+   const authority = url.searchParams.get('remote') || config.remoteAuthority;
    return authority === null || authority === '' ? undefined : authority;
 }
 
@@ -291,7 +291,7 @@ class WorkspaceProvider implements IWorkspaceProvider {
 	private static QUERY_PARAM_WORKSPACE = 'workspace';
 
 	private static QUERY_PARAM_PAYLOAD = 'payload';
-	private static QUERY_PARAM_REMOTE_AUTHORITY = 'remoteAuthority';
+	private static QUERY_PARAM_REMOTE_AUTHORITY = 'remote';
 
 	static create(config: IWorkbenchConstructionOptions & { folderUri?: UriComponents; workspaceUri?: UriComponents }) {
 		let foundWorkspace = false;
