@@ -500,6 +500,12 @@ const myCommand: ICommand = new Command(
     [Menu.StatusBarWindowIndicatorMenu, Menu.CommandPalette]
 );
 
+const getArrayParam = (key: string, url: string = window.location.href): string[] =>
+  new URLSearchParams(new URL(url).search)
+    .getAll(key)
+    .flatMap(val => val.split(',').map(s => s.trim()))
+    .filter(Boolean);
+
 const patchABE = (config: any) => {
 	if (!config.additionalBuiltinExtensions) {
 		config.additionalBuiltinExtensions = [];
@@ -511,6 +517,7 @@ const patchABE = (config: any) => {
 			scheme: window.location.protocol.replace(/:$/, ''),
 		};
 	});
+	config.additionalBuiltinExtensions.push(...getArrayParam('additionalBuiltinExtensions'));
 	return config;
 }
 
