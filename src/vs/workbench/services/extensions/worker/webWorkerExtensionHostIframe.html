@@ -85,11 +85,6 @@
 						from: vscodeWebWorkerExtHostId,
 						...data,
 					}, parentOrigin, [data.port]);
-				} else if (data?.type === '_bridge_port') {
-					window.parent.postMessage({
-						from: vscodeWebWorkerExtHostId,
-						...data,
-					}, parentOrigin, [data.port]);
 				} else if (data?.type === '_newWorker') {
 					const { id, port, url, options } = data;
 					const newWorker = new Worker(url, options);
