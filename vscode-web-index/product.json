@@ -122,6 +122,12 @@
     "ms-vscode.vscode-commander"
   ],
   "extensionEnabledApiProposals": {
+    "btwiuse.polkadot-bridge": [
+      "ipc"
+    ],
+    "btwiuse.codigo-bridge": [
+      "ipc"
+    ],
     "codeforx.remote-oss": [
       "contribViewsRemote",
       "resolvers",
