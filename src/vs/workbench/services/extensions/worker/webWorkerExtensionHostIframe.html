@@ -85,11 +85,6 @@
 						from: vscodeWebWorkerExtHostId,
 						...data,
 					}, parentOrigin, [data.port]);
-				} else if (data?.type === '_bridge') {
-					window.parent.postMessage({
-						from: vscodeWebWorkerExtHostId,
-						...data,
-					}, parentOrigin);
 				} else if (data?.type === '_bridge_port') {
 					window.parent.postMessage({
 						from: vscodeWebWorkerExtHostId,
