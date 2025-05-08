@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { AbstractMessageLogger, ILogger, LogLevel } from '../common/log.js';
+import { AbstractMessageLogger, ILogger, LogLevel, LogLevelToString } from '../common/log.js';
 
 interface ILog {
 	level: LogLevel;
@@ -44,7 +44,8 @@ export class SpdLogLogger extends AbstractMessageLogger implements ILogger {
 		}));
 	}
 
-	protected log(level: LogLevel, message: string): void {
+	protected log(level: LogLevel, message_: string): void {
+		const message = `[spdlog::${LogLevelToString(level)}] ${message_}`
 		if (this.getLevel() <= level) {
 			log(level, message);
 		} else {
