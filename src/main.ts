@@ -6,7 +6,6 @@
 import * as path from 'node:path';
 import * as fs from 'original-fs';
 import * as os from 'node:os';
-import { performance } from 'node:perf_hooks';
 import { configurePortable } from './bootstrap-node.js';
 import { bootstrapESM } from './bootstrap-esm.js';
 import { app, protocol, crashReporter, Menu, contentTracing } from 'electron';
@@ -26,7 +25,7 @@ perf.mark('code/willLoadMainBundle', {
 	// When built, the main bundle is a single JS file with all
 	// dependencies inlined. As such, we mark `willLoadMainBundle`
 	// as the start of the main bundle loading process.
-	startTime: Math.floor(performance.timeOrigin)
+	startTime: Date.now()
 });
 perf.mark('code/didLoadMainBundle');
 
