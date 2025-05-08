@@ -132,7 +132,7 @@ export async function setupServerServices(connectionToken: ServerConnectionToken
 
 	logService.trace(`Remote configuration data at ${REMOTE_DATA_FOLDER}`);
 	logService.trace('process arguments:', getRedactedServerParsedArgs(environmentService.args));
-	if (Array.isArray(productService.serverGreeting)) {
+	if (Array.isArray(productService.serverGreeting) && productService.serverGreeting.length > 0) {
 		logService.info(`\n\n${productService.serverGreeting.join('\n')}\n\n`);
 	}
 
