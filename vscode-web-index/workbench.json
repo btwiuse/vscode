@@ -1,6 +1,14 @@
 {
   "_webviewEndpoint": "/out/vs/workbench/contrib/webview/browser/pre",
   "_remoteAuthority": "vscode",
+  "configurationDefaults": {
+    "terminal.integrated.gpuAcceleration": "on",
+    "terminal.integrated.enableImages": true,
+    "terminal.integrated.suggest.enabled": true,
+    "telemetry.enableTelemetry": false,
+    "telemetry.enableCrashReporter": false,
+    "telemetry.telemetryLevel": "off"
+  },
   "settingsSyncOptions": {
     "enabled": true
   },
