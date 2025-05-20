@@ -152,7 +152,11 @@
     "vscode.html-language-features": [
       "extensionsAny"
     ],
+    "vscode.github-authentication": [
+      "authIssuers"
+    ],
     "vscode.microsoft-authentication": [
+      "authIssuers",
       "idToken",
       "nativeWindowHandle"
     ],
