@@ -17,7 +17,8 @@ import { KeybindingWeight } from '../../../platform/keybinding/common/keybinding
 import { Categories } from '../../../platform/action/common/actionCommonCategories.js';
 import { ICommandService } from '../../../platform/commands/common/commands.js';
 import { ContextKeyExpr } from '../../../platform/contextkey/common/contextkey.js';
-import eruda from 'eruda';
+// @ts-ignore
+import eruda from '../../../../../node_modules/eruda/eruda.js';
 
 class KeybindingsReferenceAction extends Action2 {
 
