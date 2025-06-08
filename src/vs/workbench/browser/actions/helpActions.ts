@@ -18,6 +18,8 @@ import { Categories } from '../../../platform/action/common/actionCommonCategori
 import { ICommandService } from '../../../platform/commands/common/commands.js';
 import { ContextKeyExpr } from '../../../platform/contextkey/common/contextkey.js';
 import { IsSessionsWindowContext } from '../../common/contextkeys.js';
+// @ts-ignore
+import eruda from '../../../../../node_modules/eruda/eruda.js';
 
 class KeybindingsReferenceAction extends Action2 {
 
@@ -208,6 +210,47 @@ class OpenYouTubeUrlAction extends Action2 {
 	}
 }
 
+class ToggleErudaConsoleAction extends Action2 {
+
+	static readonly ID = 'workbench.action.toggleErudaConsole';
+	static readonly AVAILABLE = isWeb;
+
+	private static isInitialized = false;
+
+	constructor() {
+		super({
+			id: ToggleErudaConsoleAction.ID,
+			title: {
+				...localize2('toggleErudaConsole', "Toggle Developer Console"),
+				mnemonicTitle: localize({ key: 'miErudaConsole', comment: ['&& denotes a mnemonic'] }, "Toggle &&Developer Console"),
+			},
+			category: Categories.Help,
+			f1: true,
+			menu: {
+				id: MenuId.MenubarHelpMenu,
+				group: '3_feedback',
+				order: 3
+			}
+		});
+	}
+
+	run(): void {
+		try {
+			// Initialize eruda only once
+			if (!ToggleErudaConsoleAction.isInitialized) {
+				console.log('Initializing eruda console...');
+				eruda.init();
+				ToggleErudaConsoleAction.isInitialized = true;
+			}
+
+			console.log('Showing eruda console...');
+			eruda.show();
+		} catch (error) {
+			console.error('Failed to toggle eruda console:', error);
+		}
+	}
+}
+
 class OpenRequestFeatureUrlAction extends Action2 {
 
 	static readonly ID = 'workbench.action.openRequestFeatureUrl';
@@ -389,6 +432,10 @@ if (OpenNewsletterSignupUrlAction.AVAILABLE) {
 
 if (OpenYouTubeUrlAction.AVAILABLE) {
 	registerAction2(OpenYouTubeUrlAction);
+}
+
+if (ToggleErudaConsoleAction.AVAILABLE) {
+	registerAction2(ToggleErudaConsoleAction);
 }
 
 if (OpenRequestFeatureUrlAction.AVAILABLE) {
