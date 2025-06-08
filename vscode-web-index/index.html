@@ -44,23 +44,12 @@
     <link rel="icon" href="./favicon.ico" type="image/x-icon" />
     <link rel="manifest" href="./manifest.json" crossorigin="use-credentials" />
     <link rel="stylesheet" href="./out/vs/code/browser/workbench/web-only.css">
-    <script type="importmap">
-      {
-        "imports": {
-          "eruda": "https://esm.sh/eruda"
-        }
-      }
-    </script>
   </head>
 
   <body aria-label=""></body>
 
   <!-- Startup (do not modify order of script tags!) -->
   <!-- load /workbench.json from web-only.js -->
-  <script type="module" async>
-    import eruda from "eruda";
-    eruda.init();
-  </script>
   <script>
     function fetchJSON(url, options = {}) {
       const {
