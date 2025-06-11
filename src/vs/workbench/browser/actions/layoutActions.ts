@@ -386,6 +386,25 @@ MenuRegistry.appendMenuItems([
 			),
 			order: 2
 		}
+	}, {
+		id: MenuId.LayoutControlMenu,
+		item: {
+			group: '2_pane_toggles',
+			command: {
+				id: 'workbench.action.toggleFullScreen',
+				title: localize('toggleFullScreen', "Toggle Full Screen"),
+				icon: fullscreenIcon,
+				toggled: { condition: IsMainWindowFullscreenContext, icon: fullscreenIcon }
+			},
+			when: ContextKeyExpr.and(
+				IsAuxiliaryWindowContext.negate(),
+				ContextKeyExpr.or(
+					ContextKeyExpr.equals('config.workbench.layoutControl.type', 'toggles'),
+					ContextKeyExpr.equals('config.workbench.layoutControl.type', 'both')
+				)
+			),
+			order: 3
+		}
 	}
 ]);
 
