@@ -10,6 +10,7 @@
     "telemetry.enableTelemetry": false,
     "telemetry.enableCrashReporter": false,
     "telemetry.telemetryLevel": "off",
+    "workbench.sideBar.location": "right",
     "workbench.startupEditor": "none"
   },
   "settingsSyncOptions": {
