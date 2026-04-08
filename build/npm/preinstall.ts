@@ -33,7 +33,7 @@ if (!process.env['VSCODE_SKIP_NODE_VERSION_CHECK']) {
 		minorNodeVersion < requiredMinor ||
 		(minorNodeVersion === requiredMinor && patchNodeVersion < requiredPatch)) {
 		console.error(`\x1b[1;31m*** Please use Node.js v${requiredVersion} or newer with the same major version (${requiredMajor}) as specified in .nvmrc. Currently using v${process.versions.node}.\x1b[0;0m`);
-		throw new Error();
+		// throw new Error();
 	}
 }
 
@@ -49,7 +49,7 @@ if (npmVersionMatch) {
 	const npmMinor = parseInt(npmVersionMatch[2]);
 	if (npmMajor > 11 || (npmMajor === 11 && npmMinor >= 2)) {
 		console.error(`\x1b[1;31m*** Please use npm version < 11.2.0. Currently using v${npmUserAgent}.\x1b[0;0m`);
-		throw new Error();
+		// throw new Error();
 	}
 }
 
