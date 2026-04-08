@@ -261,11 +261,22 @@ export function prepareBuiltInCopilotRipgrepShim(platform: string, arch: string,
 	const copilotPackagePlatformArch = toCopilotPackagePlatformArch(platform, arch);
 	const tgrepPlatformArch = toCopilotTgrepPlatformArch(platform, arch);
 
+	if (!fs.existsSync(builtInCopilotExtensionDir)) {
+		console.warn(`[prepareBuiltInCopilotExtensionShims] Built-in copilot extension not found at ${builtInCopilotExtensionDir}, skipping`);
+		return;
+	}
+
 	const extensionNodeModules = path.join(builtInCopilotExtensionDir, 'node_modules');
 	const copilotBase = path.join(extensionNodeModules, '@github', 'copilot');
 	const copilotSdkBase = path.join(copilotBase, 'sdk');
+	if (!fs.existsSync(copilotBase)) {
+		console.warn(`[prepareBuiltInCopilotExtensionShims] Copilot package not found at ${copilotBase}, skipping`);
+		return;
+	}
+
 	if (!fs.existsSync(copilotSdkBase)) {
-		throw new Error(`[prepareBuiltInCopilotRipgrepShim] Copilot SDK directory not found at ${copilotSdkBase}`);
+		console.warn(`[prepareBuiltInCopilotExtensionShims] Copilot SDK directory not found at ${copilotSdkBase}, skipping`);
+		return;
 	}
 	materializeBuiltInCopilotSdkPlatformFiles(copilotPackagePlatformArch, tgrepPlatformArch, copilotBase, appNodeModulesDir, options);
 	pruneNonTargetCopilotSdkPrebuilds(copilotPackagePlatformArch, path.join(copilotSdkBase, 'prebuilds'), copilotPlatforms);
