@@ -759,6 +759,8 @@ export abstract class AbstractExtensionManagementService extends CommontExtensio
 			compatibleExtension = extension;
 		}
 
+		compatibleExtension = extension;
+
 		if (!compatibleExtension) {
 			if (sameVersion) {
 				compatibleExtension = (await this.galleryService.getExtensions([{ ...extension.identifier, version: extension.version }], { targetPlatform, compatible: true, productVersion }, CancellationToken.None))[0] || null;
