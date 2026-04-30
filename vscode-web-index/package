@@ -46,6 +46,8 @@ cp -v ../letterpress-*.svg $WWW/out/media/
 cp -v workbench.json index.html $WWW
 cp -v social.png $WWW
 
+cp -r -v agents $WWW
+
 echo "Updating product.json"
 DATE="$(node -p 'new Date().toISOString()')"
 COMMIT="$(git rev-parse HEAD || echo Unknown)"

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="Agent Sessions" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <link rel="apple-touch-icon" href="/code-192.png" />
+    <link rel="manifest" href="/agents/manifest.json" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,viewport-fit=cover"
+    />
+    <meta property="og:title" content="Agent Sessions — codigo.dev" />
+    <meta
+      property="og:description"
+      content="Connect to your agent host from any device."
+    />
+    <meta name="theme-color" content="#1e1e1e" />
+    <meta name="vscode:targetTunnel" content="" />
+    <meta name="vscode:additionalBuiltinExtensions" content="{}" />
+    <link
+      rel="stylesheet"
+      href="/out/vs/sessions/sessions.web.main.internal.css"
+    >
+    <style id="vscode-css-modules" media="screen"></style>
+    <style>
+      :root {
+        color-scheme: dark;
+      }
+      body, html {
+        background-color: var(--vscode-agents-host-background, #1e1e1e);
+      }
+    </style>
+  </head>
+  <body aria-label=""></body>
+  <script>
+    function fetchJSON(url, options = {}) {
+      const {
+        method = "GET",
+        parseJSON = true,
+        logErrors = true,
+        body = null,
+        headers = {},
+      } = options;
+
+      try {
+        const xhr = new XMLHttpRequest();
+        xhr.open(method.toUpperCase(), url, false); // synchronous request
+
+        // Set headers
+        Object.entries(headers).forEach(([key, value]) => {
+          xhr.setRequestHeader(key, value);
+        });
+
+        // Send with optional body
+        const requestBody = body
+          ? (typeof body === "string" ? body : JSON.stringify(body))
+          : null;
+        xhr.send(requestBody);
+
+        if (xhr.status === 200) {
+          const response = xhr.responseText;
+          return parseJSON ? JSON.parse(response) : response;
+        }
+
+        if (logErrors) {
+          console.error(`Failed to fetch ${url}:`, xhr.statusText);
+        }
+
+        return null;
+      } catch (error) {
+        if (logErrors) {
+          console.error(`Error fetching ${url}:`, error);
+        }
+        return null;
+      }
+    }
+    globalThis._VSCODE_PRODUCT_JSON = fetchJSON("/product.json");
+    globalThis._VSCODE_PACKAGE_JSON = fetchJSON("/package.json");
+    globalThis._VSCODE_FILE_ROOT = new URL(
+      "/out/",
+      window.location.origin,
+    ).href;
+  </script>
+  <script>
+    const sheet = document.getElementById("vscode-css-modules").sheet;
+    globalThis._VSCODE_CSS_LOAD = function (url) {
+      sheet.insertRule("@import url(" + url + ");");
+    };
+
+    const importMap = { imports: {} };
+    const cssModules = JSON.parse("[]");
+    const fileRoot =
+      new URL(globalThis._VSCODE_FILE_ROOT, window.location.origin).href;
+    for (const cssModule of cssModules) {
+      const cssUrl = new URL(cssModule, fileRoot).href;
+      const jsSrc = "globalThis._VSCODE_CSS_LOAD('" + cssUrl + "');\n";
+      const blob = new Blob([jsSrc], { type: "application/javascript" });
+      importMap.imports[cssUrl] = URL.createObjectURL(blob);
+    }
+    const importMapElement = document.createElement("script");
+    importMapElement.type = "importmap";
+    importMapElement.textContent = JSON.stringify(importMap);
+    document.head.appendChild(importMapElement);
+  </script>
+  <script type="module" src="/out/nls.messages.js"></script>
+  <script type="module">
+    import { create, URI } from '/out/vs/sessions/sessions.web.main.internal.js';
+    const remote = new URL(document.location.href).searchParams.get('remote');
+    create(document.body, {
+            remoteAuthority: remote ?? undefined,
+            productConfiguration: {
+                    nameShort: 'Sessions (Web)',
+                    nameLong: 'Sessions (Web)',
+                    enableTelemetry: false,
+            },
+            // ${additionalBuiltinExtensions}
+            workspaceProvider: {
+                    workspace: undefined,
+                    open: async () => true,
+                    payload: [['isSessionsWindow', 'true']],
+            },
+    });
+  </script>
+</html>
