@@ -1,0 +1,44 @@
+{
+  "name": "Agent Sessions",
+  "short_name": "Sessions",
+  "description": "Connect to an Agent Host Protocol server and manage agentic sessions from any device.",
+  "start_url": "/agents",
+  "scope": "/agents",
+  "lang": "en-US",
+  "display": "standalone",
+  "display_override": ["window-controls-overlay"],
+  "background_color": "#1e1e1e",
+  "theme_color": "#1e1e1e",
+  "icons": [
+    {
+      "src": "/code-192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/code-192-maskable.png",
+      "type": "image/png",
+      "sizes": "192x192",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/code-512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    },
+    {
+      "src": "/code-512-maskable.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "New Session",
+      "url": "/agents?action=new",
+      "description": "Create a new agent session"
+    }
+  ],
+  "categories": ["developer", "productivity"]
+}

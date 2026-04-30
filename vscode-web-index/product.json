@@ -5,7 +5,8 @@
   "extensionsGallery": {
     "serviceUrl": "https://no-cors.deno.dev/https://marketplace.visualstudio.com/_apis/public/gallery",
     "resourceUrlTemplate": "https://no-cors.deno.dev/https://{publisher}.vscode-unpkg.net/{publisher}/{name}/{version}/{path}",
-    "itemUrl": "https://no-cors.deno.dev/https://marketplace.visualstudio.com/items"
+    "itemUrl": "https://no-cors.deno.dev/https://marketplace.visualstudio.com/items",
+    "controlUrl": "https://no-cors.deno.dev/https://main.vscode-cdn.net/extensions/marketplace.json"
   },
   "__extensionsGallery": {
     "serviceUrl": "https://open-vsx.org/vscode/gallery",
