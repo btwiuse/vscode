@@ -154,7 +154,9 @@
       "extensionsAny"
     ],
     "vscode.github-authentication": [
-      "authIssuers"
+      "authIssuers",
+      "authProviderSpecific",
+      "agentSessionsWorkspace"
     ],
     "vscode.microsoft-authentication": [
       "authIssuers",
