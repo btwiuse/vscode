@@ -1,1 +1,2 @@
-pnpm run gulp vscode-web-only
+# pnpm run gulp vscode-web-only
+node build/next/index.ts bundle --target web-only --out ../vscode-web-only
