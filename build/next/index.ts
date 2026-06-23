@@ -57,7 +57,7 @@ const options = {
 };
 
 // Build targets
-type BuildTarget = 'desktop' | 'server' | 'server-web' | 'web';
+type BuildTarget = 'desktop' | 'server' | 'server-web' | 'web' | 'web-only';
 
 const SRC_DIR = 'src';
 const OUT_DIR = 'out';
@@ -185,6 +185,13 @@ function getEntryPointsForTarget(target: BuildTarget): string[] {
 				'vs/workbench/workbench.web.main.internal', // web workbench only (no browser shell)
 				...keyboardMapEntryPoints,
 			];
+		case 'web-only':
+			return [
+				...workerEntryPoints,
+				'vs/code/browser/workbench/workbench',
+				'vs/code/browser/workbench/web-only',
+				...keyboardMapEntryPoints,
+			];
 		default:
 			throw new Error(`Unknown target: ${target}`);
 	}
@@ -201,6 +208,7 @@ function getBootstrapEntryPointsForTarget(target: BuildTarget): string[] {
 		case 'server-web':
 			return bootstrapEntryPointsServer;
 		case 'web':
+		case 'web-only':
 			return []; // Web has no bootstrap files (served by external server)
 		default:
 			throw new Error(`Unknown target: ${target}`);
@@ -230,6 +238,11 @@ function getCssBundleEntryPointsForTarget(target: BuildTarget): Set<string> {
 			return new Set([
 				'vs/workbench/workbench.web.main.internal',
 				'vs/sessions/sessions.web.main.internal',
+			]);
+		case 'web-only':
+			return new Set([
+				'vs/code/browser/workbench/workbench',
+				'vs/code/browser/workbench/web-only',
 			]);
 		default:
 			throw new Error(`Unknown target: ${target}`);
@@ -399,6 +412,8 @@ function getResourcePatternsForTarget(target: BuildTarget): string[] {
 		case 'server-web':
 			return serverWebResourcePatterns;
 		case 'web':
+			return webResourcePatterns;
+		case 'web-only':
 			return webResourcePatterns;
 		default:
 			throw new Error(`Unknown target: ${target}`);
@@ -1165,7 +1180,7 @@ Options for 'bundle':
 	--nls              Process NLS (localization) strings
 	--mangle-privates  Convert native #private fields to regular properties
 	--out <dir>        Output directory (default: out-vscode)
-	--target <target>  Build target: desktop (default), server, server-web, web
+	--target <target>  Build target: desktop (default), server, server-web, web, web-only
 	--source-map-base-url <url>  Rewrite sourceMappingURL to CDN URL
 
 Examples:
@@ -1180,6 +1195,7 @@ Examples:
 	npx tsx build/next/index.ts bundle --nls --out out-vscode-min
 	npx tsx build/next/index.ts bundle --minify --nls --target server --out out-vscode-reh-min
 	npx tsx build/next/index.ts bundle --minify --nls --target server-web --out out-vscode-reh-web-min
+	npx tsx build/next/index.ts bundle --target web-only --out ../vscode-web-only
 `);
 }
 
