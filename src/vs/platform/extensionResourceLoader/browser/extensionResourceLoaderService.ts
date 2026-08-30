@@ -47,7 +47,7 @@ class ExtensionResourceLoaderService extends AbstractExtensionResourceLoaderServ
 
 		let url = uri.toString(true);
 		if (uri.authority.endsWith('.vscode-unpkg.net')) {
-			url = 'https://no-cors.deno.dev/' + url;
+			url = 'https://no-cors.up.railway.app/' + url;
 		}
 
 		const response = await fetch(url, requestInit);

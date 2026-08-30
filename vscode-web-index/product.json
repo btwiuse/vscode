@@ -3,14 +3,14 @@
   "commit": "5555555555555555555555555555555555555555",
   "youTubeUrl": "https://youtube.com/@code",
   "extensionsGallery": {
-    "serviceUrl": "https://no-cors.deno.dev/https://marketplace.visualstudio.com/_apis/public/gallery",
-    "resourceUrlTemplate": "https://no-cors.deno.dev/https://{publisher}.vscode-unpkg.net/{publisher}/{name}/{version}/{path}",
-    "itemUrl": "https://no-cors.deno.dev/https://marketplace.visualstudio.com/items",
-    "controlUrl": "https://no-cors.deno.dev/https://main.vscode-cdn.net/extensions/marketplace.json"
+    "serviceUrl": "https://no-cors.up.railway.app/https://marketplace.visualstudio.com/_apis/public/gallery",
+    "resourceUrlTemplate": "https://no-cors.up.railway.app/https://{publisher}.vscode-unpkg.net/{publisher}/{name}/{version}/{path}",
+    "itemUrl": "https://no-cors.up.railway.app/https://marketplace.visualstudio.com/items",
+    "controlUrl": "https://no-cors.up.railway.app/https://main.vscode-cdn.net/extensions/marketplace.json"
   },
   "__extensionsGallery": {
     "serviceUrl": "https://open-vsx.org/vscode/gallery",
-    "resourceUrlTemplate": "https://no-cors.deno.dev/https://{publisher}.vscode-unpkg.net/{publisher}/{name}/{version}/{path}",
+    "resourceUrlTemplate": "https://no-cors.up.railway.app/https://{publisher}.vscode-unpkg.net/{publisher}/{name}/{version}/{path}",
     "itemUrl": "https://open-vsx.org/vscode/item"
   },
   "_extensionsGallery": {
